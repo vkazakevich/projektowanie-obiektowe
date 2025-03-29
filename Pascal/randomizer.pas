@@ -42,29 +42,23 @@ begin
 end;
 
 begin
-   Writeln('Write MIN random number (min 0):');
-   Readln(min);
+   repeat
+      Writeln('Write MIN random number (min 0):');
+      Readln(min)
+   until
+      (min >= 0);
 
-   if (min < 0) then begin
-      Writeln('Validation Error: MIN must be greater than 0.');
-      Halt (1);
-   end;
+   repeat
+      Writeln('Write MAX random number (min ', (min + 1),'):');
+      Readln(max)
+   until
+      (max > min);
 
-   Writeln('Write MAX random number (min ', (min + 1),'):');
-   Readln(max);
-
-   if (min > max) then begin
-      Writeln('Validation Error: MAX must be greater than MIN.');
-      Halt (1);
-   end;
-
-   Writeln('Write count of random numbers (min 1):');
-   Readln(size);
-
-   if (size < 1) then begin
-      Writeln('Validation Error: Count of random numbers must be greater than 0.');
-      Halt (1);
-   end;
+   repeat
+      Writeln('Write count of random numbers (min 1):');
+      Readln(size)
+   until
+      (size > 0);
 
    setLength(randomArr, size);
 
