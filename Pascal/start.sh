@@ -8,15 +8,15 @@ docker_build_and_run() {
 
     docker build --quiet -t $DOCKER_IMAGE .
     docker run --rm -it -v "$(pwd)":/home/student/projobj/ vkthedev/pascal:latest $fpc_command $filename.pas >/dev/null
-    docker run --rm -it -v "$(pwd)":/home/student/projobj/ vkthedev/pascal:latest ./bin/$filename
+    docker run --rm -it -v "$(pwd)":/home/student/projobj/ vkthedev/pascal:latest ./build/$filename
 }
 
 compile_and_run() {
-    docker_build_and_run "fpc -FE./bin" "Randomizer"
+    docker_build_and_run "fpc -FE./build" "Randomizer"
 }
 
 compile_and_run_tests() {
-    docker_build_and_run "fpc -FE./bin -Fu./fptest/src -Fu./fptest/3rdparty/epiktimer -Mobjfpc" "TestRunner"
+    docker_build_and_run "fpc -FE./build -Fu./fptest/src -Fu./fptest/3rdparty/epiktimer -Mobjfpc" "TestRunner"
 }
 
 shift $((OPTIND - 1))
