@@ -26,11 +26,11 @@ begin
    until
       (size > 0);
 
-   setLength(randomArr, size);
+   SetLength(randomArr, size);
 
-   RandomIntArr(randomArr, size, min, max);
-   DisplayArr(randomArr, size);
+   FillRandomIntArr(randomArr, min, max);
+   DisplayArr(randomArr);
 
-   SortArr(randomArr, size);
-   DisplayArr(randomArr, size);
+   BubbleSort(randomArr);
+   DisplayArr(randomArr);
 end. 
