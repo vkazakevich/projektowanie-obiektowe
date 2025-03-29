@@ -1,0 +1,3 @@
+[submodule "Pascal/fptest"]
+	path = Pascal/fptest
+	url = https://github.com/graemeg/fptest.git
