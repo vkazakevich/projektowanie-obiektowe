@@ -11,11 +11,6 @@ RUN apt-get install -y fp-compiler fp-units-fcl
 RUN useradd -ms /bin/bash student 
 RUN adduser student sudo
 
-
-EXPOSE 80
-
-VOLUME /home/student/skrypty/
-
 USER student
 WORKDIR /home/student/
 RUN mkdir projobj
@@ -23,5 +18,3 @@ WORKDIR /home/student/projobj
 # CMD /bin/bash
 
 COPY . .
-
-CMD ["/usr/bin/bash", "/start.sh"]

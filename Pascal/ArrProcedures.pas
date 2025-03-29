@@ -1,5 +1,7 @@
 unit ArrProcedures;
 
+{$mode objfpc}
+
 interface
 
 uses SysUtils;
