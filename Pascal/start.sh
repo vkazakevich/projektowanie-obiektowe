@@ -1,22 +1,27 @@
 #!/bin/bash
 
-readonly DOCKER_IMAGE="vkthedev/pascal"
+readonly DOCKER_IMAGE_NAME="pascal"
+readonly DOCKER_DIR="/home/student/projobj/"
+
+docker_build_if_not_exists() {
+    if [[ "$(docker images -q $DOCKER_IMAGE_NAME:latest 2>/dev/null)" == "" ]]; then
+        docker build -t $DOCKER_IMAGE_NAME .
+    fi
+}
 
 docker_build_and_run() {
-    fpc_command=$1
-    filename=$2
-
-    docker build --quiet -t $DOCKER_IMAGE .
-    docker run --rm -it -v "$(pwd)":/home/student/projobj/ vkthedev/pascal:latest $fpc_command $filename.pas >/dev/null
-    docker run --rm -it -v "$(pwd)":/home/student/projobj/ vkthedev/pascal:latest ./build/$filename
+    docker_build_if_not_exists
+    docker run --rm -it -v "$(pwd)":$DOCKER_DIR $DOCKER_IMAGE_NAME:latest $@
 }
 
 compile_and_run() {
-    docker_build_and_run "fpc -FE./build" "Randomizer"
+    docker_build_and_run fpc -FE./build Randomizer.pas >/dev/null
+    docker_build_and_run ./build/Randomizer
 }
 
 compile_and_run_tests() {
-    docker_build_and_run "fpc -FE./build -Fu./fptest/src -Fu./fptest/3rdparty/epiktimer -Mobjfpc" "TestRunner"
+    docker_build_and_run fpc -FE./build -Fu./fptest/src -Fu./fptest/3rdparty/epiktimer -Mobjfpc TestRunner.pas >/dev/null
+    docker_build_and_run ./build/TestRunner
 }
 
 shift $((OPTIND - 1))

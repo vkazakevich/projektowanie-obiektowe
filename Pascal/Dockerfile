@@ -15,6 +15,5 @@ USER student
 WORKDIR /home/student/
 RUN mkdir projobj
 WORKDIR /home/student/projobj
-# CMD /bin/bash
 
 COPY . .
