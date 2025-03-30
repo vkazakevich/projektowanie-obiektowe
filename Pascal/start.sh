@@ -30,6 +30,9 @@ case "$1" in
 --tests)
     compile_and_run_tests
     ;;
+--build)
+    docker build -t $DOCKER_IMAGE_NAME .
+    ;;
 *)
     compile_and_run
     ;;
