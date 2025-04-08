@@ -16,7 +16,7 @@
 Kod: [Pascal](./Pascal)
 
 
-**Zadanie 2** Symfony [WIP]
+**Zadanie 2** Symfony
 
 :white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/vkazakevich/projektowanie-obiektowe/commit/6a54c89d19e2b904f456d8e82c7ca89d2526923a)
 
@@ -25,6 +25,8 @@ Kod: [Pascal](./Pascal)
 :white_check_mark: 4.0 wymaganie 3 [Link do commita 3](https://github.com/vkazakevich/projektowanie-obiektowe/commit/7c15326a5aba465daa3e819ed2f5388efcb4c8d8)
 
 :white_check_mark: 4.5 wymaganie 4 [Link do commita 4](https://github.com/vkazakevich/projektowanie-obiektowe/commit/d9b4b1b4932b4f86a1a2f8bc4dd92db0866cdecc)
+
+:white_check_mark: 5.0 wymaganie 5 [Link do commita 5](https://github.com/vkazakevich/projektowanie-obiektowe/commit/54c944ac4646e41d8b2922e216900f3260cf0042)
 
 
 Kod: [Symfony](./Symfony)
