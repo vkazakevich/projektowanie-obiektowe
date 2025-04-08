@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Api;
 
 use App\Dto\ProductDto;
 use App\Entity\Product;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 
-#[Route('/products')]
+#[Route('/api/products')]
 final class ProductController extends AbstractController
 {
     #[Route(name: 'api_product', methods: ['GET'])]
@@ -20,7 +20,7 @@ final class ProductController extends AbstractController
         return $this->json($productRepository->findAll());
     }
 
-    #[Route(name: 'app_product_create', methods: ['POST'])]
+    #[Route(name: 'api_product_create', methods: ['POST'])]
     public function create(
         #[MapRequestPayload] ProductDto $productDto, 
         ProductRepository $productRepository
@@ -38,13 +38,13 @@ final class ProductController extends AbstractController
         return $this->json($product, Response::HTTP_CREATED);
     }
 
-    #[Route('/{id}', name: 'app_product_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'api_product_show', methods: ['GET'])]
     public function show(Product $product): JsonResponse
     {
         return $this->json($product);
     }
 
-    #[Route('/{id}', name: 'app_product_update', methods: ['PUT'])]
+    #[Route('/{id}', name: 'api_product_update', methods: ['PUT'])]
     public function update(
         #[MapRequestPayload] ProductDto $productDto, 
         Product $product,
@@ -61,7 +61,7 @@ final class ProductController extends AbstractController
         return $this->json($product);
     }
 
-    #[Route('/{id}', name: 'app_product_delete', methods: ['DELETE'])]
+    #[Route('/{id}', name: 'api_product_delete', methods: ['DELETE'])]
     public function delete(Product $product, ProductRepository $productRepository): JsonResponse
     {
         $productRepository->remove($product, true);

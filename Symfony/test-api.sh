@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readonly BASE_URL="http://localhost:8000"
+readonly BASE_URL="http://localhost:8000/api"
 
 # Colors for messages
 readonly RED_TEXT="\033[31m"
@@ -28,17 +28,29 @@ check_status_code() {
     fi
 }
 
+get_data_by_entity() {
+    case $1 in
+    "products")
+        echo '{"name": "Test Product", "price": 1000.25, "quantity": 10000}'
+        ;;
+    "categories")
+        echo '{"name": "Test Category"}'
+        ;;
+    "customers")
+        random_email="$(openssl rand -hex 6)@example.com"
+        echo '{"firstName": "John", "lastName": "Doe", "email": "'$random_email'"}'
+        ;;
+    *) echo '{}' ;;
+    esac
+}
+
 check_create_endpoint() {
     local url="${BASE_URL}/$1"
 
     status_code=$(curl --silent $url \
         --header 'Content-Type: application/json' \
         --header 'Accept: application/json' \
-        --data '{
-            "name": "Test Product",
-            "price": 123.23,
-            "quantity": 1000
-        }' \
+        --data "$(get_data_by_entity $1)" \
         --write-out %{http_code} \
         --output /dev/null)
 
@@ -75,11 +87,7 @@ check_update_endpoint() {
     status_code=$(curl --silent --request PUT $url \
         --header 'Content-Type: application/json' \
         --header 'Accept: application/json' \
-        --data '{
-            "name": "Test Product Updated",
-            "price": 12000.55,
-            "quantity": 100000
-        }' \
+        --data "$(get_data_by_entity $1)" \
         --write-out %{http_code} \
         --output /dev/null)
 
@@ -104,12 +112,20 @@ get_last_entity_id() {
     curl --silent --request GET $url \
         --header 'Content-Type: application/json' \
         --header 'Accept: application/json' |
-        jq '[.[].id] | max'
+        jq -r '[.[].id] | max'
 }
 
-check_create_endpoint "products"
-check_index_endpoint "products"
-entity_id=$(get_last_entity_id "products")
-check_show_endpoint "products" $entity_id
-check_update_endpoint "products" $entity_id
-check_delete_endpoint "products" $entity_id
+run_tests_for_entity() {
+    local entity=$1
+    check_create_endpoint $entity
+    check_index_endpoint $entity
+
+    local entity_last_id=$(get_last_entity_id $entity)
+    check_show_endpoint $entity $entity_last_id
+    check_update_endpoint $entity $entity_last_id
+    check_delete_endpoint $entity $entity_last_id
+}
+
+run_tests_for_entity "products"
+run_tests_for_entity "categories"
+run_tests_for_entity "customers"
