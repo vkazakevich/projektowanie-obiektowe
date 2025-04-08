@@ -24,5 +24,7 @@ Kod: [Pascal](./Pascal)
 
 :white_check_mark: 4.0 wymaganie 3 [Link do commita 3](https://github.com/vkazakevich/projektowanie-obiektowe/commit/7c15326a5aba465daa3e819ed2f5388efcb4c8d8)
 
+:white_check_mark: 4.5 wymaganie 4 [Link do commita 4](https://github.com/vkazakevich/projektowanie-obiektowe/commit/d9b4b1b4932b4f86a1a2f8bc4dd92db0866cdecc)
+
 
 Kod: [Symfony](./Symfony)
