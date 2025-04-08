@@ -5,11 +5,17 @@ namespace App\DataFixtures;
 use App\Entity\Category;
 use App\Entity\Customer;
 use App\Entity\Product;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    public function __construct(
+        private UserPasswordHasherInterface $hasher
+    ) {}
+
     public function load(ObjectManager $manager): void
     {
         $categories = [];
@@ -26,7 +32,7 @@ class AppFixtures extends Fixture
             $randomCategory = $categories[array_rand($categories)];
 
             $product = new Product();
-            $product->setName('product '.$i);
+            $product->setName('product ' . $i);
             $product->setPrice(mt_rand(10, 100));
             $product->setQuantity(mt_rand(0, 1000));
             $product->setCategory($randomCategory);
@@ -41,6 +47,16 @@ class AppFixtures extends Fixture
             $customer->setEmail("customer$i@email.com");
             $manager->persist($customer);
         }
+
+        $user = new User();
+
+        $user->setEmail("admin@admin.com");
+        $user->setRoles(['ROLE_ADMIN']);
+
+        $hash = $this->hasher->hashPassword($user, "password");
+        $user->setPassword($hash);
+
+        $manager->persist($user);
 
         $manager->flush();
     }
