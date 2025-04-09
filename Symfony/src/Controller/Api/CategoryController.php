@@ -14,21 +14,23 @@ use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 #[Route('/api/categories')]
 final class CategoryController extends AbstractController
 {
+    public function __construct(
+        private readonly CategoryRepository $categoryRepository
+    ) {}
+
     #[Route(name: 'api_category', methods: ['GET'])]
-    public function index(CategoryRepository $categoryRepository): JsonResponse
+    public function index(): JsonResponse
     {
-        return $this->json($categoryRepository->findAll());
+        return $this->json($this->categoryRepository->findAll());
     }
 
     #[Route(name: 'api_category_create', methods: ['POST'])]
     public function create(
-        #[MapRequestPayload] CategoryDto $categoryDto, 
-        CategoryRepository $categoryRepository
-    ): JsonResponse
-    {
+        #[MapRequestPayload] CategoryDto $categoryDto
+    ): JsonResponse {
         $category = new Category();
         $category->setName($categoryDto->name);
-        $categoryRepository->save($category, true);
+        $this->categoryRepository->save($category, true);
 
         return $this->json($category, Response::HTTP_CREATED);
     }
@@ -41,21 +43,19 @@ final class CategoryController extends AbstractController
 
     #[Route('/{id}', name: 'api_category_update', methods: ['PUT'])]
     public function update(
-        #[MapRequestPayload] CategoryDto $categoryDto, 
-        Category $category,
-        CategoryRepository $categoryRepository
-    ): JsonResponse
-    {
+        #[MapRequestPayload] CategoryDto $categoryDto,
+        Category $category
+    ): JsonResponse {
         $category->setName($categoryDto->name);
-        $categoryRepository->save($category, true);
+        $this->categoryRepository->save($category, true);
 
         return $this->json($category);
     }
 
     #[Route('/{id}', name: 'api_category_delete', methods: ['DELETE'])]
-    public function delete(Category $category, CategoryRepository $categoryRepository): JsonResponse
+    public function delete(Category $category): JsonResponse
     {
-        $categoryRepository->remove($category, true);
+        $this->categoryRepository->remove($category, true);
 
         return $this->json('', Response::HTTP_NO_CONTENT);
     }
