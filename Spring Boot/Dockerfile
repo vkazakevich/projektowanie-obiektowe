@@ -23,4 +23,4 @@ COPY . .
 
 EXPOSE 8080
 
-CMD [ "gradle", "run" ]
+CMD [ "./gradlew", "bootRun" ]
