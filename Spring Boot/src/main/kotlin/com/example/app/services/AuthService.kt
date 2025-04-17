@@ -1,5 +1,8 @@
 package org.example.app.services
 
+import org.springframework.stereotype.Service
+
+@Service
 object AuthService {
     var authorized: Boolean = false
 
@@ -8,7 +11,7 @@ object AuthService {
 
     fun login(username: String, password: String): Boolean {
         authorized = false
-
+        
         if (MOCK_USERNAME != username) return false
         if (MOCK_PASSWORD != password) return false
 
