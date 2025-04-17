@@ -3,7 +3,15 @@ package org.example.app.services
 object AuthService {
     var authorized: Boolean = false
 
-    fun login(): Boolean {
+    const val MOCK_USERNAME = "admin"
+    const val MOCK_PASSWORD = "password"
+
+    fun login(username: String, password: String): Boolean {
+        authorized = false
+
+        if (MOCK_USERNAME != username) return false
+        if (MOCK_PASSWORD != password) return false
+
         authorized = true
         return authorized
     }
