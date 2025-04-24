@@ -11,16 +11,17 @@ import (
 func (h *Handler) GetTheWeatherByCity(ctx echo.Context) error {
 	city := ctx.Param("city")
 
-	var data []models.WeatherData
-	h.DB.Where("city LIKE ?", "%"+city+"%").Find(&data)
-
 	res, err := proxy.FetchTheWeatherByCity(city)
 
 	if err != nil {
 		return ctx.String(http.StatusBadRequest, "bad request")
 	}
 
-	apiData := &models.WeatherData{City: city, Temperature: res.Temperature, Time: res.Data + " " + res.Time + ":00"}
+	apiData := models.WeatherData{City: city, Temperature: res.Temperature, Time: res.Data + " " + res.Time + ":00"}
+	h.DB.Create(&apiData)
 
-	return ctx.JSON(http.StatusOK, apiData)
+	var data []models.WeatherData
+	h.DB.Where("city LIKE ?", "%"+city+"%").Find(&data)
+
+	return ctx.JSON(http.StatusOK, data)
 }
