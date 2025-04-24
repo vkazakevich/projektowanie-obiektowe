@@ -1,4 +1,4 @@
-module proxy
+module github.com/vkazakevich/projektowanie-obiektowe/Echo
 
 go 1.24.2
 

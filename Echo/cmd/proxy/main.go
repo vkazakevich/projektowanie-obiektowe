@@ -1,15 +1,17 @@
 package main
 
 import (
-	"net/http"
-
 	"github.com/labstack/echo/v4"
+	"github.com/vkazakevich/projektowanie-obiektowe/Echo/internal/app/handlers"
 )
 
 func main() {
 	e := echo.New()
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
-	})
+
+	h := &handlers.Handler{}
+
+	w := e.Group("/weather")
+	w.GET("/:city", h.GetTheWeatherByCity)
+
 	e.Logger.Fatal(e.Start(":8000"))
 }
