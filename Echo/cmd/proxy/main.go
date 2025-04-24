@@ -2,13 +2,19 @@ package main
 
 import (
 	"github.com/labstack/echo/v4"
+	"github.com/vkazakevich/projektowanie-obiektowe/Echo/internal/app/db"
 	"github.com/vkazakevich/projektowanie-obiektowe/Echo/internal/app/handlers"
+	"github.com/vkazakevich/projektowanie-obiektowe/Echo/internal/app/utils"
 )
 
 func main() {
+
+	db := db.InitDatabase()
+	utils.FillDBSeeds(db)
+
 	e := echo.New()
 
-	h := &handlers.Handler{}
+	h := &handlers.Handler{DB: db}
 
 	w := e.Group("/weather")
 	w.GET("/:city", h.GetTheWeatherByCity)
