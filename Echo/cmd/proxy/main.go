@@ -18,6 +18,7 @@ func main() {
 
 	w := e.Group("/weather")
 	w.GET("/:city", h.GetTheWeatherByCity)
+	w.GET("", h.GetTheWeatherByCities)
 
 	e.Logger.Fatal(e.Start(":8000"))
 }
