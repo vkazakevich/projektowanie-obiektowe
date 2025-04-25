@@ -56,7 +56,7 @@ Kod: [Spring Boot](<./Spring Boot>)
 
 :white_check_mark: 4.5 wymaganie 4 [Link do commita 4](https://github.com/vkazakevich/projektowanie-obiektowe/commit/b3ad79dd5c7a3b68f8b225e98dc33e22ad57b7b6)
 
-:white_check_mark: 5.0 wymaganie 5 [Link do commita 5](https://github.com/vkazakevich/projektowanie-obiektowe/commit/b3ad79dd5c7a3b68f8b225e98dc33e22ad57b7b6)
+:white_check_mark: 5.0 wymaganie 5 [Link do commita 5](https://github.com/vkazakevich/projektowanie-obiektowe/commit/2b338a9b25ed9a2cd14270870616b09eb801931a)
 
 
 Kod: [Echo](<./Echo>)
