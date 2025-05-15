@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { makePayment } from '../api/payments'
 import { useCart } from '../hooks/useCart'
 import { getProducts } from '../api/products'
@@ -9,18 +9,18 @@ function Payments() {
   const { cartItems, emptyCart } = useCart()
   const [amount, setAmount] = useState(null)
 
-  const calcAmount = (products) => {
+  const calcAmount = useCallback((products) => {
     const result = cartItems.reduce((acc, current) => {
       const product = products.find((p) => p.ID === current)
       return product ? acc + product.price : acc
     }, 0)
 
     setAmount(result)
-  }
+  }, [cartItems])
 
   useEffect(() => {
     getProducts().then((products) => calcAmount(products))
-  }, [cartItems])
+  }, [cartItems, calcAmount])
 
   async function payment(e) {
     e.preventDefault()
