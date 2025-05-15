@@ -1,11 +1,9 @@
 name: Run Linters
 
 on:
-    [push]
-# on:
-#   push:
-#     paths:
-#       - 'React/client/**'
+  push:
+    paths:
+      - 'React/client/**'
 
 env:
   NODE_VERSION: 22
