@@ -1,8 +1,8 @@
-# Frontend
+# React
 
 ## Demo
 
-https://github.com/user-attachments/assets/5c5c05c4-1169-40bb-917f-c4ee1d228444
+https://github.com/user-attachments/assets/2007525b-cb6e-4279-897d-2bd6ac42d879
 
 ## Progress
 
