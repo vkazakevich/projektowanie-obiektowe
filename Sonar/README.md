@@ -3,6 +3,10 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=vkazakevich_sonar-server&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=vkazakevich_sonar-server)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=vkazakevich_sonar-client&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=vkazakevich_sonar-client)
 
+## Demo
+
+https://github.com/user-attachments/assets/45ac0358-d59c-461b-8c4f-75241aeb43bb
+
 ## Progress
 
 - 3.0 Add eslint in git hooks ([Commit `1aeaa7c`](https://github.com/vkazakevich/projektowanie-obiektowe/commit/1aeaa7cc84c656fbe6f81152fca8238ca241ec79))
