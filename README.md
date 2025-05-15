@@ -1,5 +1,8 @@
 # projektowanie-obiektowe
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=vkazakevich_sonar-server&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=vkazakevich_sonar-server)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=vkazakevich_sonar-client&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=vkazakevich_sonar-client)
+
 **Zadanie 1** Pascal
 
 :white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/vkazakevich/projektowanie-obiektowe/commit/6cf465993aba1a25efe1f61ee3910838f9ba769b)
