@@ -3,7 +3,7 @@ name: Run Linters
 on:
   push:
     paths:
-      - 'Frontend/client/**'
+      - 'React/client/**'
 
 env:
   NODE_VERSION: 22
