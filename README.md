@@ -78,3 +78,18 @@ Kod: [Echo](<./Echo>)
 
 
 Kod: [React](<./React>)
+
+**Zadanie 6** Sonar
+
+:white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/vkazakevich/projektowanie-obiektowe/commit/1aeaa7cc84c656fbe6f81152fca8238ca241ec79)
+
+:white_check_mark: 3.5 wymaganie 2 [Link do commita 2](https://github.com/vkazakevich/projektowanie-obiektowe/commit/b5a3b7539f3aaeab95797f046a080db4cd6ff3ca)
+
+:white_check_mark: 4.0 wymaganie 3 [Link do commita 3](https://github.com/vkazakevich/projektowanie-obiektowe/commit/b5a3b7539f3aaeab95797f046a080db4cd6ff3ca)
+
+:white_check_mark: 4.5 wymaganie 4 [Link do commita 4](https://github.com/vkazakevich/projektowanie-obiektowe/commit/b5a3b7539f3aaeab95797f046a080db4cd6ff3ca)
+
+:white_check_mark: 5.0 wymaganie 5 [Link do commita 5](https://github.com/vkazakevich/projektowanie-obiektowe/commit/b5a3b7539f3aaeab95797f046a080db4cd6ff3ca)
+
+
+Kod: [Sonar](<./Sonar>)
