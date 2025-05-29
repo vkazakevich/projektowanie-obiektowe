@@ -93,3 +93,10 @@ Kod: [React](<./React>)
 
 
 Kod: [Sonar](<./Sonar>)
+
+**Zadanie 7** Vapor (Swift) [WIP]
+
+:white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/vkazakevich/projektowanie-obiektowe/commit/2f023312d092daeb8df95888c7ad6cf4ec33710f)
+
+
+Kod: [Swift](<./Swift>)
