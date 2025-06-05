@@ -287,6 +287,16 @@ class PracticeSoftwareTestingComTest(unittest.TestCase):
         self.assertIn("Por categoría", el_f.text)
         self.assertIn("Por marca", el_f.text)
 
+
+        el_nav = driver.find_element(By.ID, 'navbarSupportedContent')
+        
+        self.assertIn("Inicio", el_nav.text)
+        self.assertIn("Categorías", el_nav.text)
+        self.assertIn("Contacto", el_nav.text)
+        self.assertIn("Iniciar sesión", el_nav.text)
+        self.assertIn("ES", el_nav.text)
+
+
     def test_lang_fr(self):
         driver = self.driver
         driver.get("https://practicesoftwaretesting.com/")
