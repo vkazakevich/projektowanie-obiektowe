@@ -105,5 +105,8 @@ Kod: [Swift](<./Swift>)
 
 :white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/vkazakevich/projektowanie-obiektowe/commit/8f115039a8d93dfba1574c59563933e6193f43ca)
 
+<!-- 
+:white_check_mark: 4.5 wymaganie 4 [Link do commita 4](https://github.com/vkazakevich/projektowanie-obiektowe/commit/2ad3dba39e3f3a1cfa13c941e8760f0e4c92c334) -->
+
 
 Kod: [Tests](<./Tests>)
