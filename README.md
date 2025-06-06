@@ -98,6 +98,8 @@ Kod: [Sonar](<./Sonar>)
 
 :white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/vkazakevich/projektowanie-obiektowe/commit/2f023312d092daeb8df95888c7ad6cf4ec33710f)
 
+:white_check_mark: 3.5 wymaganie 2 [Link do commita 2](https://github.com/vkazakevich/projektowanie-obiektowe/commit/5cb74a87c56d33f7a72842367c66d759d4c5b15a)
+
 
 Kod: [Swift](<./Swift>)
 
