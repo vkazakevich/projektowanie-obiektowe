@@ -1,0 +1,35 @@
+#extend("layouts/main"):
+    #export("body"):
+        <h1>Edit Product #(product.title)</h1>
+
+        <div style="margin-bottom: 20px;">
+            <a href="/products/#(product.id)">Back to product</a>
+        </div>
+
+        <div>
+            <form action="/products/#(product.id)/put" method="POST">
+                <label style="margin-bottom: 20px; display: block;">
+                    Title
+                    <input name="title" placeholder="Title" value="#(product.title)"
+                        required>
+                </label>
+
+                <label style="margin-bottom: 20px; display: block;">
+                    Price
+                    <input name="price" placeholder="Price" type="number" min="0"
+                        step="0.001" value="#(product.price)" required>
+                </label>
+
+                <label style="margin-bottom: 20px; display: block;">
+                    Quantity
+                    <input name="quantity" placeholder="Quantity" type="number" min="0"
+                        value="#(product.quantity)" required>
+                </label>
+
+                <button type="submit"
+                    style="margin-bottom: 20px; display: block;">Update
+                    Product</button>
+            </form>
+        </div>
+    #endexport
+#endextend

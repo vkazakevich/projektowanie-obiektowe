@@ -1,0 +1,42 @@
+#extend("layouts/main"):
+  #export("body"):
+    <h1>Products</h1>
+    <p>
+      <a href="/products/create">Create New Product</a>
+    </p>
+    #if(products):
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          #for(product in products):
+            <tr>
+              <td>#(product.id)</td>
+              <td>#(product.title)</td>
+              <td>#(product.price)</td>
+              <td>#(product.quantity)</td>
+              <td>
+                <a href="/products/#(product.id)">Details</a>
+                <a href="/products/#(product.id)/edit">Edit</a>
+
+                <form action="/products/#(product.id)/delete" method="POST">
+                  <button type="submit" onclick="return confirm('Are you sure?')">Delete
+                    Product</button>
+                </form>
+              </td>
+            </tr>
+          #endfor
+        </tbody>
+      </table>
+    #else:
+      <h2>There aren’t any products yet!</h2>
+    #endif
+  #endexport
+#endextend

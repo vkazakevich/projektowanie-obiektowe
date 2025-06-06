@@ -31,9 +31,9 @@ final class Product: Model, @unchecked Sendable {
     func toDTO() -> ProductDTO {
         .init(
             id: self.id,
-            title: self.$title.value,
-            price: self.$price.value,
-            quantity: self.$quantity.value
+            title: self.title,
+            price: self.price,
+            quantity: self.quantity
         )
     }
 }
