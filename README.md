@@ -94,7 +94,7 @@ Kod: [React](<./React>)
 
 Kod: [Sonar](<./Sonar>)
 
-**Zadanie 7** Vapor (Swift) [WIP]
+**Zadanie 7** Vapor (Swift)
 
 :white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/vkazakevich/projektowanie-obiektowe/commit/2f023312d092daeb8df95888c7ad6cf4ec33710f)
 
@@ -103,6 +103,8 @@ Kod: [Sonar](<./Sonar>)
 :white_check_mark: 4.0 wymaganie 3 [Link do commita 3](https://github.com/vkazakevich/projektowanie-obiektowe/commit/75e7ef5acda3471d0bffe0bb65679741d7d2e84c)
 
 :white_check_mark: 4.5 wymaganie 3 [Link do commita 4](https://github.com/vkazakevich/projektowanie-obiektowe/commit/ab1def71c9315344416505706a141d99a425002f)
+
+:white_check_mark: 5.0 wymaganie 3 [Link do commita 5](https://github.com/vkazakevich/projektowanie-obiektowe/commit/8da8bd7fc5da75505de6267a8f693c7880ac81e4)
 
 
 Kod: [Swift](<./Swift>)
