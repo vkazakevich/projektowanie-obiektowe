@@ -3,6 +3,8 @@ import Leaf
 import Vapor
 
 struct ProductController: RouteCollection {
+    static let cacheKey = "products"
+
     func boot(routes: any RoutesBuilder) throws {
         let products = routes.grouped("products")
 
@@ -21,10 +23,17 @@ struct ProductController: RouteCollection {
     }
 
     @Sendable
-    func index(req: Request) throws -> EventLoopFuture<View> {
-        Product.query(on: req.db).with(\.$category).all().flatMap { products in
-            return req.view.render("products/index", ["products": products])
+    func index(req: Request) async throws -> View {
+        if let products = try await req.redis.get(.init(ProductController.cacheKey), asJSON: [Product].self) {
+            return try await req.view.render("products/index", ["products": products])
         }
+
+        let products = try await Product.query(on: req.db).with(\.$category).all()
+
+        try await req.redis.set(.init(ProductController.cacheKey), toJSON: products)
+        _ = req.redis.expire(.init(ProductController.cacheKey), after: .seconds(30))
+
+        return try await req.view.render("products/index", ["products": products])
     }
 
     @Sendable
