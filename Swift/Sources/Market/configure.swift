@@ -2,8 +2,8 @@ import Fluent
 import FluentSQLiteDriver
 import Leaf
 import NIOSSL
-import Vapor
 import Redis
+import Vapor
 
 // configures your application
 public func configure(_ app: Application) async throws {
@@ -21,6 +21,7 @@ public func configure(_ app: Application) async throws {
 
     app.views.use(.leaf)
 
-    // register routes
+    try await app.autoMigrate()
+
     try routes(app)
 }
