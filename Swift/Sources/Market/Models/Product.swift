@@ -1,4 +1,5 @@
 import Fluent
+
 import struct Foundation.UUID
 
 /// Property wrappers interact poorly with `Sendable` checking, causing a warning for the `@ID` property
@@ -6,7 +7,7 @@ import struct Foundation.UUID
 /// afterwards with `@unchecked Sendable`.
 final class Product: Model, @unchecked Sendable {
     static let schema = "products"
-    
+
     @ID(key: .id)
     var id: UUID?
 
@@ -19,21 +20,26 @@ final class Product: Model, @unchecked Sendable {
     @Field(key: "quantity")
     var quantity: Int
 
-    init() { }
+    @Parent(key: "category_id")
+    var category: Category
 
-    init(id: UUID? = nil, title: String, price: Double, quantity: Int) {
+    init() {}
+
+    init(id: UUID? = nil, title: String, price: Double, quantity: Int, categoryID: UUID) {
         self.id = id
         self.title = title
         self.price = price
         self.quantity = quantity
+        $category.id = categoryID
     }
-    
+
     func toDTO() -> ProductDTO {
         .init(
             id: self.id,
             title: self.title,
             price: self.price,
-            quantity: self.quantity
+            quantity: self.quantity,
+            categoryID: self.$category.id
         )
     }
 }

@@ -6,6 +6,7 @@
             <p>Price: #(product.price)</p>
             <p>Quantity: #(product.quantity)</p>
             <p>ID: #(product.id)</p>
+            <p>Category: #(product.category.name)</p>
         </div>
         <div>
             <a href="/products/#(product.id)/edit">Edit Product</a>

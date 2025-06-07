@@ -26,6 +26,18 @@
                         value="#(product.quantity)" required>
                 </label>
 
+
+                <label style="margin-bottom: 20px; display: block;">
+                    Category
+                    <select name="categoryID">
+                        #for(category in categories):
+                            <option value="#(category.id)"
+                                #if(product.category.id == category.id): selected #endif>
+                                #(category.name)</option>
+                        #endfor
+                    </select>
+                </label>
+
                 <button type="submit"
                     style="margin-bottom: 20px; display: block;">Update
                     Product</button>

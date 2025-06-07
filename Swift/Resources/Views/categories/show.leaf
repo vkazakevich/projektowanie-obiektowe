@@ -1,0 +1,12 @@
+#extend("layouts/main"):
+    #export("body"):
+        <h1>Category #(category.name)</h1>
+        <div>
+            <p>Name: #(category.name)</p>
+            <p>ID: #(category.id)</p>
+        </div>
+        <div>
+            <a href="/categories/#(category.id)/edit">Edit Category</a>
+        </div>
+    #endexport
+#endextend

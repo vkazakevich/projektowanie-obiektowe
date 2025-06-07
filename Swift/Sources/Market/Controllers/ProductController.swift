@@ -22,23 +22,27 @@ struct ProductController: RouteCollection {
 
     @Sendable
     func index(req: Request) throws -> EventLoopFuture<View> {
-        Product.query(on: req.db).all().flatMap { products in
+        Product.query(on: req.db).with(\.$category).all().flatMap { products in
             return req.view.render("products/index", ["products": products])
         }
     }
 
     @Sendable
-    func show(req: Request) throws -> EventLoopFuture<View> {
-        Product.find(req.parameters.get("productID"), on: req.db)
-            .unwrap(or: Abort(.notFound))
-            .flatMap { product in
-                return req.view.render("products/show", ["product": product])
-            }
+    func show(req: Request) async throws -> View {
+        guard let product = try await Product.find(req.parameters.get("productID"), on: req.db)
+        else {
+            throw Abort(.notFound)
+        }
+
+        _ = try await product.$category.get(on: req.db)
+
+        return try await req.view.render("products/show", ["product": product])
     }
 
     @Sendable
-    func create(req: Request) throws -> EventLoopFuture<View> {
-        return req.view.render("products/create")
+    func create(req: Request) async throws -> View {
+        let categories = try await Category.query(on: req.db).all()
+        return try await req.view.render("products/create", ["categories": categories])
     }
 
     @Sendable
@@ -50,12 +54,21 @@ struct ProductController: RouteCollection {
     }
 
     @Sendable
-    func edit(req: Request) throws -> EventLoopFuture<View> {
-        Product.find(req.parameters.get("productID"), on: req.db)
-            .unwrap(or: Abort(.notFound))
-            .flatMap { product in
-                return req.view.render("products/edit", ["product": product])
-            }
+    func edit(req: Request) async throws -> View {
+        guard let product = try await Product.find(req.parameters.get("productID"), on: req.db)
+        else {
+            throw Abort(.notFound)
+        }
+
+        let categories = try await Category.query(on: req.db).all()
+
+        struct EditProductContext: Encodable {
+            var product: Product
+            var categories: [Category]
+        }
+
+        return try await req.view.render(
+            "products/edit", EditProductContext(product: product, categories: categories))
     }
 
     @Sendable
@@ -70,6 +83,7 @@ struct ProductController: RouteCollection {
         product.title = productDto.title
         product.price = productDto.price
         product.quantity = productDto.quantity
+        product.$category.id = productDto.categoryID
 
         try await product.update(on: req.db)
 

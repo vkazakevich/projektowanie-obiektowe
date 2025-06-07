@@ -12,6 +12,7 @@
             <th>Title</th>
             <th>Price</th>
             <th>Quantity</th>
+            <th>Category</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -22,6 +23,7 @@
               <td>#(product.title)</td>
               <td>#(product.price)</td>
               <td>#(product.quantity)</td>
+              <td>#(product.category.name)</td>
               <td>
                 <a href="/products/#(product.id)">Details</a>
                 <a href="/products/#(product.id)/edit">Edit</a>

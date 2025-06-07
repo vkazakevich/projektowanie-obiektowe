@@ -1,0 +1,17 @@
+#extend("layouts/main"):
+    #export("body"):
+        <h1>Category Category</h1>
+        <div>
+            <form action="/categories" method="POST">
+                <label style="margin-bottom: 20px; display: block;">
+                    Name
+                    <input name="name" placeholder="Name" required>
+                </label>
+
+                <button type="submit">
+                    Create Category
+                </button>
+            </form>
+        </div>
+    #endexport
+#endextend

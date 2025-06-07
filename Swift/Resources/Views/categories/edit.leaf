@@ -1,0 +1,23 @@
+#extend("layouts/main"):
+    #export("body"):
+        <h1>Edit Category #(category.name)</h1>
+
+        <div style="margin-bottom: 20px;">
+            <a href="/categories/#(category.id)">Back to category</a>
+        </div>
+
+        <div>
+            <form action="/categories/#(category.id)/put" method="POST">
+                <label style="margin-bottom: 20px; display: block;">
+                    Name
+                    <input name="name" placeholder="Name" value="#(category.name)"
+                        required>
+                </label>
+
+                <button type="submit"
+                    style="margin-bottom: 20px; display: block;">Update
+                    Category</button>
+            </form>
+        </div>
+    #endexport
+#endextend
