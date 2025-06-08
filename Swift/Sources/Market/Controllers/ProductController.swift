@@ -111,6 +111,8 @@ struct ProductController: RouteCollection {
         }
 
         try await product.delete(on: req.db)
+        
+        _ = req.redis.delete(.init(ProductController.cacheKey))
 
         return req.redirect(to: "/products")
     }

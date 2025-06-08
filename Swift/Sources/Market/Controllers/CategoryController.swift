@@ -56,7 +56,7 @@ struct CategoryController: RouteCollection {
     func store(req: Request) async throws -> Response {
         let category = try req.content.decode(CategoryDTO.self).toModel()
         try await category.save(on: req.db)
-        
+
         _ = req.redis.delete(.init(CategoryController.cacheKey))
 
         return req.redirect(to: "/categories")
@@ -97,6 +97,8 @@ struct CategoryController: RouteCollection {
         }
 
         try await category.delete(on: req.db)
+        
+        _ = req.redis.delete(.init(CategoryController.cacheKey))
 
         return req.redirect(to: "/categories")
     }
