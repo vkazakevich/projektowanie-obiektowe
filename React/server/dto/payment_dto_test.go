@@ -7,14 +7,15 @@ import (
 	"github.com/vkazakevich/ebiznes/Go/models"
 )
 
-func fakePaymentDto() (*PaymentDTO) {
+func fakePaymentDto() *PaymentDTO {
 	return &PaymentDTO{Amount: 10000000}
 }
 
-func TestPaymentDto (t *testing.T) {
+func TestPaymentDto(t *testing.T) {
 	dto := fakePaymentDto()
 
-    assert.NotNil(t, dto)
+	assert.NotNil(t, dto)
+	assert.NotNil(t, dto.Amount)
 
 	assert.Equal(t, uint(10000000), dto.Amount)
 }
@@ -27,8 +28,9 @@ func TestPaymentDtoModel(t *testing.T) {
 	db.Create(&p)
 
 	assert.Equal(t, p.Amount, dto.Amount)
-	
+
 	assert.NotNil(t, p.ID)
+	assert.NotNil(t, p.Amount)
 	assert.NotNil(t, p.CreatedAt)
 	assert.NotNil(t, p.UpdatedAt)
 }

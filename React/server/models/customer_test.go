@@ -2,6 +2,7 @@ package models
 
 import (
 	"testing"
+
 	"github.com/stretchr/testify/assert"
 )
 
@@ -20,5 +21,17 @@ func TestCustomerModel(t *testing.T) {
 		assert.Equal(t, "Test Last Name", p.LastName)
 		assert.Equal(t, "test@test.com", p.Email)
 	})
-}
 
+	t.Run("It can't creates Customer if empty", func(t *testing.T) {
+		c := &Customer{FirstName: "", LastName: "", Email: ""}
+		result := db.Create(&c)
+
+		assert.Error(t, result.Error)
+		assert.Equal(t, int64(0), result.RowsAffected)
+
+		assert.Equal(t, uint(0), c.ID)
+		assert.Equal(t, "", c.FirstName)
+		assert.Equal(t, "", c.LastName)
+		assert.Equal(t, "", c.Email)
+	})
+}
