@@ -232,6 +232,10 @@ def test_site_has_logo(selenium):
 def test_nav_sign_in(selenium):
     selenium.get("https://practicesoftwaretesting.com/")
 
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
+
     nc = find_element(selenium, By.CSS_SELECTOR, '[data-test="nav-sign-in"]')
     nc.click()
 
