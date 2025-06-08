@@ -250,10 +250,8 @@ def test_lang_en(selenium):
     mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
     if mobile_navbar.is_displayed():
         mobile_navbar.click()
-
-    find_element(selenium,
-                 By.CSS_SELECTOR, '[data-test="language-select"]').click()
-    find_element(selenium, By.CSS_SELECTOR, '[data-test="lang-en"]').click()
+    
+    find_element(selenium, By.ID, 'language').click()
 
     time.sleep(1)
 
@@ -289,8 +287,7 @@ def test_lang_de(selenium):
     if mobile_navbar.is_displayed():
         mobile_navbar.click()
 
-    find_element(selenium,
-                 By.CSS_SELECTOR, '[data-test="language-select"]').click()
+    find_element(selenium, By.ID, 'language').click()
     find_element(selenium, By.CSS_SELECTOR, '[data-test="lang-de"]').click()
 
     time.sleep(1)
@@ -327,8 +324,7 @@ def test_lang_es(selenium):
     if mobile_navbar.is_displayed():
         mobile_navbar.click()
 
-    find_element(selenium,
-                 By.CSS_SELECTOR, '[data-test="language-select"]').click()
+    find_element(selenium, By.ID, 'language').click()
     find_element(selenium, By.CSS_SELECTOR, '[data-test="lang-es"]').click()
 
     time.sleep(1)
@@ -365,8 +361,7 @@ def test_lang_fr(selenium):
     if mobile_navbar.is_displayed():
         mobile_navbar.click()
 
-    find_element(selenium,
-                 By.CSS_SELECTOR, '[data-test="language-select"]').click()
+    find_element(selenium, By.ID, 'language').click()
     find_element(selenium, By.CSS_SELECTOR, '[data-test="lang-fr"]').click()
 
     time.sleep(1)
@@ -395,8 +390,7 @@ def test_lang_nl(selenium):
     if mobile_navbar.is_displayed():
         mobile_navbar.click()
 
-    find_element(selenium,
-                 By.CSS_SELECTOR, '[data-test="language-select"]').click()
+    find_element(selenium, By.ID, 'language').click()
     find_element(selenium, By.CSS_SELECTOR, '[data-test="lang-nl"]').click()
 
     time.sleep(1)
@@ -425,8 +419,7 @@ def test_lang_tr(selenium):
     if mobile_navbar.is_displayed():
         mobile_navbar.click()
 
-    find_element(selenium,
-                 By.CSS_SELECTOR, '[data-test="language-select"]').click()
+    find_element(selenium, By.ID, 'language').click()
     find_element(selenium, By.CSS_SELECTOR, '[data-test="lang-tr"]').click()
 
     time.sleep(1)
@@ -532,7 +525,7 @@ def test_search(selenium):
                       By.CSS_SELECTOR, '[data-test="search-submit"]')
     ss.click()
 
-    time.sleep(1)
+    time.sleep(3)
 
     sc = find_element(selenium,
                       By.CSS_SELECTOR, '[data-test="search-caption"]')
