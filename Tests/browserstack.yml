@@ -9,6 +9,7 @@ buildName: bstack-demo
 buildIdentifier: ${BUILD_NUMBER}
 projectName: PO
 testObservability: true
-networkLogs: true
+networkLogs: false
+debug: false
 consoleLogs: info
 framework: pytest
