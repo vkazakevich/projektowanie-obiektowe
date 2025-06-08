@@ -20,6 +20,10 @@ def test_title(selenium):
 def test_nav_categories(selenium):
     selenium.get("https://practicesoftwaretesting.com/")
 
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
+
     nav_categories = find_element(selenium,
                                   By.CSS_SELECTOR, '[data-test="nav-categories"]')
     nav_categories.click()
@@ -33,6 +37,10 @@ def test_nav_categories(selenium):
 
 def test_nav_category_hand_tools(selenium):
     selenium.get("https://practicesoftwaretesting.com/")
+
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
 
     nc = find_element(selenium,
                       By.CSS_SELECTOR, '[data-test="nav-categories"]')
@@ -51,6 +59,10 @@ def test_nav_category_hand_tools(selenium):
 def test_nav_category_power_tools(selenium):
     selenium.get("https://practicesoftwaretesting.com/")
 
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
+
     nc = find_element(selenium,
                       By.CSS_SELECTOR, '[data-test="nav-categories"]')
     nc.click()
@@ -68,6 +80,10 @@ def test_nav_category_power_tools(selenium):
 def test_nav_category_other(selenium):
     selenium.get("https://practicesoftwaretesting.com/")
 
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
+
     nc = find_element(selenium,
                       By.CSS_SELECTOR, '[data-test="nav-categories"]')
     nc.click()
@@ -83,6 +99,10 @@ def test_nav_category_other(selenium):
 
 def test_nav_category_special_tools(selenium):
     selenium.get("https://practicesoftwaretesting.com/")
+
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
 
     nc = find_element(selenium,
                       By.CSS_SELECTOR, '[data-test="nav-categories"]')
@@ -101,10 +121,12 @@ def test_nav_category_special_tools(selenium):
 def test_nav_category_rentals(selenium):
     selenium.get("https://practicesoftwaretesting.com/")
 
-    time.sleep(1)
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
 
-    nc = find_element(selenium,
-                      By.CSS_SELECTOR, '[data-test="nav-categories"]')
+    nc = find_element(selenium, By.CSS_SELECTOR,
+                      '[data-test="nav-categories"]')
     nc.click()
 
     ht = find_element(selenium,
@@ -118,6 +140,10 @@ def test_nav_category_rentals(selenium):
 
 def test_nav_category_special_tools_error(selenium):
     selenium.get("https://practicesoftwaretesting.com/")
+
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
 
     nc = find_element(selenium,
                       By.CSS_SELECTOR, '[data-test="nav-categories"]')
@@ -136,6 +162,10 @@ def test_nav_category_special_tools_error(selenium):
 def test_nav_contact(selenium):
     selenium.get("https://practicesoftwaretesting.com/")
 
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
+
     nc = find_element(selenium, By.CSS_SELECTOR, '[data-test="nav-contact"]')
     nc.click()
 
@@ -147,10 +177,8 @@ def test_nav_contact(selenium):
 def test_product_page(selenium):
     selenium.get("https://practicesoftwaretesting.com")
 
-    pc = find_element(selenium, By.CLASS_NAME, 'card')
+    pc = find_element(selenium, By.CSS_SELECTOR, 'a.card:first-of-type')
     pc.click()
-
-    time.sleep(2)
 
     el = find_element(selenium, By.ID, 'description')
     assert el is not None
@@ -159,14 +187,8 @@ def test_product_page(selenium):
 def test_product_has_related_products(selenium):
     selenium.get("https://practicesoftwaretesting.com")
 
-    pc = find_element(selenium, By.CLASS_NAME, 'card')
+    pc = find_element(selenium, By.CSS_SELECTOR, 'a.card:first-of-type')
     pc.click()
-
-    pc = find_element(selenium, By.CLASS_NAME, 'card')
-    pc.click()
-
-    time.sleep(2)
-    time.sleep(2)
 
     el = find_element(selenium, By.CLASS_NAME, 'card')
     assert el is not None
@@ -175,10 +197,9 @@ def test_product_has_related_products(selenium):
 def test_product_has_img(selenium):
     selenium.get("https://practicesoftwaretesting.com")
 
-    pc = find_element(selenium, By.CLASS_NAME, 'card')
+    pc = find_element(selenium, By.CSS_SELECTOR, 'a.card:first-of-type')
     pc.click()
 
-    time.sleep(2)
     img = find_element(selenium, By.CSS_SELECTOR, '.card-img-wrapper > img')
     assert img.is_displayed()
 
@@ -187,10 +208,10 @@ def test_product_has_add_to_cart_button(selenium):
     selenium.get(
         "https://practicesoftwaretesting.com/")
 
-    pc = find_element(selenium, By.CLASS_NAME, 'card')
+    pc = find_element(selenium, By.CSS_SELECTOR, 'a.card:first-of-type')
     pc.click()
 
-    time.sleep(2)
+
     btn = find_element(selenium, By.ID, 'btn-add-to-cart')
     assert btn.is_displayed()
 
@@ -223,6 +244,10 @@ def test_nav_sign_in(selenium):
 def test_lang_en(selenium):
     selenium.get("https://practicesoftwaretesting.com/")
 
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
+
     find_element(selenium,
                  By.CSS_SELECTOR, '[data-test="language-select"]').click()
     find_element(selenium, By.CSS_SELECTOR, '[data-test="lang-en"]').click()
@@ -231,6 +256,10 @@ def test_lang_en(selenium):
 
     el_c = find_element(selenium, By.CLASS_NAME, 'container-fluid')
     assert "This is a DEMO application" in el_c.text
+
+    filters = find_element(selenium, By.CSS_SELECTOR, '[data-test="filters"]')
+    if filters.is_displayed():
+        filters.click()
 
     el_f = find_element(selenium, By.ID, 'filters')
 
@@ -253,6 +282,10 @@ def test_lang_en(selenium):
 def test_lang_de(selenium):
     selenium.get("https://practicesoftwaretesting.com/")
 
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
+
     find_element(selenium,
                  By.CSS_SELECTOR, '[data-test="language-select"]').click()
     find_element(selenium, By.CSS_SELECTOR, '[data-test="lang-de"]').click()
@@ -261,6 +294,10 @@ def test_lang_de(selenium):
 
     el_c = find_element(selenium, By.CLASS_NAME, 'container-fluid')
     assert "Das ist eine Demo Applikation" in el_c.text
+
+    filters = find_element(selenium, By.CSS_SELECTOR, '[data-test="filters"]')
+    if filters.is_displayed():
+        filters.click()
 
     el_f = find_element(selenium, By.ID, 'filters')
 
@@ -283,6 +320,10 @@ def test_lang_de(selenium):
 def test_lang_es(selenium):
     selenium.get("https://practicesoftwaretesting.com/")
 
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
+
     find_element(selenium,
                  By.CSS_SELECTOR, '[data-test="language-select"]').click()
     find_element(selenium, By.CSS_SELECTOR, '[data-test="lang-es"]').click()
@@ -291,6 +332,10 @@ def test_lang_es(selenium):
 
     el_c = find_element(selenium, By.CLASS_NAME, 'container-fluid')
     assert "Esta es una aplicación DEMO" in el_c.text
+
+    filters = find_element(selenium, By.CSS_SELECTOR, '[data-test="filters"]')
+    if filters.is_displayed():
+        filters.click()
 
     el_f = find_element(selenium, By.ID, 'filters')
 
@@ -313,6 +358,10 @@ def test_lang_es(selenium):
 def test_lang_fr(selenium):
     selenium.get("https://practicesoftwaretesting.com/")
 
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
+
     find_element(selenium,
                  By.CSS_SELECTOR, '[data-test="language-select"]').click()
     find_element(selenium, By.CSS_SELECTOR, '[data-test="lang-fr"]').click()
@@ -321,6 +370,10 @@ def test_lang_fr(selenium):
 
     el_c = find_element(selenium, By.CLASS_NAME, 'container-fluid')
     assert "Ceci est une application de démonstration" in el_c.text
+
+    filters = find_element(selenium, By.CSS_SELECTOR, '[data-test="filters"]')
+    if filters.is_displayed():
+        filters.click()
 
     el_f = find_element(selenium, By.ID, 'filters')
 
@@ -335,6 +388,10 @@ def test_lang_fr(selenium):
 def test_lang_nl(selenium):
     selenium.get("https://practicesoftwaretesting.com/")
 
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
+
     find_element(selenium,
                  By.CSS_SELECTOR, '[data-test="language-select"]').click()
     find_element(selenium, By.CSS_SELECTOR, '[data-test="lang-nl"]').click()
@@ -343,6 +400,10 @@ def test_lang_nl(selenium):
 
     el_c = find_element(selenium, By.CLASS_NAME, 'container-fluid')
     assert "Dit is een DEMO-applicatie" in el_c.text
+
+    filters = find_element(selenium, By.CSS_SELECTOR, '[data-test="filters"]')
+    if filters.is_displayed():
+        filters.click()
 
     el_f = find_element(selenium, By.ID, 'filters')
 
@@ -357,6 +418,10 @@ def test_lang_nl(selenium):
 def test_lang_tr(selenium):
     selenium.get("https://practicesoftwaretesting.com/")
 
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
+
     find_element(selenium,
                  By.CSS_SELECTOR, '[data-test="language-select"]').click()
     find_element(selenium, By.CSS_SELECTOR, '[data-test="lang-tr"]').click()
@@ -365,6 +430,10 @@ def test_lang_tr(selenium):
 
     el_c = find_element(selenium, By.CLASS_NAME, 'container-fluid')
     assert "Bu bir DEMO uygulamasıdır" in el_c.text
+
+    filters = find_element(selenium, By.CSS_SELECTOR, '[data-test="filters"]')
+    if filters.is_displayed():
+        filters.click()
 
     el_f = find_element(selenium, By.ID, 'filters')
 
@@ -471,6 +540,10 @@ def test_register_empty_form_error(selenium):
 def test_search(selenium):
     selenium.get("https://practicesoftwaretesting.com/")
 
+    filters = find_element(selenium, By.CSS_SELECTOR, '[data-test="filters"]')
+    if filters.is_displayed():
+        filters.click()
+
     sq = find_element(selenium, By.CSS_SELECTOR, '[data-test="search-query"]')
     sq.send_keys("Thor")
 
@@ -491,6 +564,10 @@ def test_search(selenium):
 
 def test_search_lowercase(selenium):
     selenium.get("https://practicesoftwaretesting.com/")
+
+    filters = find_element(selenium, By.CSS_SELECTOR, '[data-test="filters"]')
+    if filters.is_displayed():
+        filters.click()
 
     sq = find_element(selenium, By.CSS_SELECTOR, '[data-test="search-query"]')
     sq.send_keys("thor")
@@ -513,6 +590,10 @@ def test_search_lowercase(selenium):
 def test_search_uppercase(selenium):
     selenium.get("https://practicesoftwaretesting.com/")
 
+    filters = find_element(selenium, By.CSS_SELECTOR, '[data-test="filters"]')
+    if filters.is_displayed():
+        filters.click()
+
     sq = find_element(selenium, By.CSS_SELECTOR, '[data-test="search-query"]')
     sq.send_keys("THOR")
 
@@ -532,6 +613,10 @@ def test_search_uppercase(selenium):
 
 def test_search_with_spaces(selenium):
     selenium.get("https://practicesoftwaretesting.com/")
+
+    filters = find_element(selenium, By.CSS_SELECTOR, '[data-test="filters"]')
+    if filters.is_displayed():
+        filters.click()
 
     sq = find_element(selenium, By.CSS_SELECTOR, '[data-test="search-query"]')
     sq.send_keys("       thor    ")
