@@ -109,7 +109,7 @@ Kod: [Sonar](<./Sonar>)
 
 Kod: [Swift](<./Swift>)
 
-**Zadanie 8** Tests [WIP]
+**Zadanie 8** Tests
 
 :white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/vkazakevich/projektowanie-obiektowe/commit/8f115039a8d93dfba1574c59563933e6193f43ca)
 
@@ -119,6 +119,8 @@ Kod: [Swift](<./Swift>)
 
 
 :white_check_mark: 4.5 wymaganie 4 [Link do commita 4](https://github.com/vkazakevich/projektowanie-obiektowe/commit/2ad3dba39e3f3a1cfa13c941e8760f0e4c92c334)
+
+:white_check_mark: 5.0 wymaganie 4 [Link do commita 5](https://github.com/vkazakevich/projektowanie-obiektowe/commit/351b225adbaf6c8750558262e79acb23a764b70e)
 
 
 Kod: [Tests](<./Tests>)
