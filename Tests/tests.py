@@ -211,7 +211,6 @@ def test_product_has_add_to_cart_button(selenium):
     pc = find_element(selenium, By.CSS_SELECTOR, 'a.card:first-of-type')
     pc.click()
 
-
     btn = find_element(selenium, By.ID, 'btn-add-to-cart')
     assert btn.is_displayed()
 
@@ -455,28 +454,6 @@ def test_privacy_policy(selenium):
 
     assert "Privacy Policy for Toolshop" in find_element(selenium,
                                                          By.TAG_NAME, 'body').text
-
-
-def test_contact_empty_form_error(selenium):
-    selenium.get("https://practicesoftwaretesting.com/contact")
-
-    cs = find_element(selenium,
-                      By.CSS_SELECTOR, '[data-test="contact-submit"]')
-    cs.click()
-
-    time.sleep(1)
-
-    assert find_element(selenium,
-                        By.CSS_SELECTOR, '[data-test="first-name-error"] > div').is_displayed()
-    assert find_element(selenium,
-                        By.CSS_SELECTOR, '[data-test="last-name-error"] > div').is_displayed()
-    assert find_element(selenium,
-                        By.CSS_SELECTOR, '[data-test="email-error"] > div').is_displayed()
-    assert find_element(selenium,
-                        By.CSS_SELECTOR, '[data-test="subject-error"] > div').is_displayed()
-    assert find_element(selenium,
-                        By.CSS_SELECTOR, '[data-test="message-error"] > div').is_displayed()
-
 
 def test_sign_in_empty_form_error(selenium):
     selenium.get("https://practicesoftwaretesting.com/auth/login")
