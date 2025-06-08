@@ -11,7 +11,10 @@ public func configure(_ app: Application) async throws {
     // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
 
     if let redisURL = Environment.get("REDIS_URL") {
-        app.redis.configuration = try RedisConfiguration(url: redisURL)
+        var config = TLSConfiguration.makeClientConfiguration()
+        config.certificateVerification = .none
+
+        app.redis.configuration = try RedisConfiguration(url: redisURL, tlsConfiguration: config)
     } else {
         app.redis.configuration = try RedisConfiguration(hostname: "localhost")
     }
