@@ -24,7 +24,9 @@ struct CategoryController: RouteCollection {
 
     @Sendable
     func index(req: Request) async throws -> View {
-        if let categories = try await req.redis.get(.init(CategoryController.cacheKey), asJSON: [Category].self) {
+        if let categories = try await req.redis.get(
+            .init(CategoryController.cacheKey), asJSON: [Category].self)
+        {
             return try await req.view.render("categories/index", ["categories": categories])
         }
 
@@ -54,6 +56,8 @@ struct CategoryController: RouteCollection {
     func store(req: Request) async throws -> Response {
         let category = try req.content.decode(CategoryDTO.self).toModel()
         try await category.save(on: req.db)
+        
+        _ = req.redis.delete(.init(CategoryController.cacheKey))
 
         return req.redirect(to: "/categories")
     }
@@ -79,6 +83,8 @@ struct CategoryController: RouteCollection {
         category.name = CategoryDTO.name
 
         try await category.update(on: req.db)
+
+        _ = req.redis.delete(.init(CategoryController.cacheKey))
 
         return req.redirect(to: "/categories")
     }
