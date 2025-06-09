@@ -109,6 +109,8 @@ Kod: [Sonar](<./Sonar>)
 
 Kod: [Swift](<./Swift>)
 
+Demo: [Link](https://po-swift-824cc8171273.herokuapp.com/)
+
 **Zadanie 8** Tests
 
 :white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/vkazakevich/projektowanie-obiektowe/commit/8f115039a8d93dfba1574c59563933e6193f43ca)
