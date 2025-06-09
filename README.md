@@ -109,7 +109,7 @@ Kod: [Sonar](<./Sonar>)
 
 Kod: [Swift](<./Swift>)
 
-Demo: [Link](https://po-swift-824cc8171273.herokuapp.com/)
+Link: [Link](https://po-swift-824cc8171273.herokuapp.com/)
 
 **Zadanie 8** Tests
 
