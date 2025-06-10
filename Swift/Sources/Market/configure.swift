@@ -25,6 +25,7 @@ public func configure(_ app: Application) async throws {
     app.migrations.add(CategorySeed())
 
     app.migrations.add(CreateProduct())
+    app.migrations.add(ProductSeed())
 
     app.views.use(.leaf)
 
