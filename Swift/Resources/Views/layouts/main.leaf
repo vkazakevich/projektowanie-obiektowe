@@ -9,6 +9,7 @@
     <nav>
         <a href="/products">Products</a>
         <a href="/categories">Categories</a>
+        <a href="/posts">Posts</a>
     </nav>
     </header>
     <main>

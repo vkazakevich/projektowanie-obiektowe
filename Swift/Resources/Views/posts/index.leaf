@@ -1,0 +1,28 @@
+#extend("layouts/main"):
+  #export("body"):
+    <h1>Posts</h1>
+    <p>
+      <a href="/posts/create">Create New Post</a>
+    </p>
+    #if(posts):
+      #for(post in posts):
+        <div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
+          <h3><a href="/posts/#(post.id)">#(post.title)</a></h3>
+          <p>#(post.content)</p>
+          <p>Date: #date(post.createdAt, "dd MM yyyy HH:mm") | Author: #(post.author)</p>
+
+          <div>
+            <a href="/posts/#(post.id)/edit">Edit</a>
+
+            <form action="/posts/#(post.id)/delete" method="POST">
+              <button type="submit" onclick="return confirm('Are you sure?')">Delete
+                Post</button>
+            </form>
+          </div>
+        </div>
+      #endfor
+    #else:
+      <h2>There aren’t any posts yet!</h2>
+    #endif
+  #endexport
+#endextend
