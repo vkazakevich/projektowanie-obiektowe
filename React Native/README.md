@@ -1,4 +1,4 @@
-# Android
+# React Native
 
 - 3.0 Create a list of categories and products
 - 3.5 Add cart view
