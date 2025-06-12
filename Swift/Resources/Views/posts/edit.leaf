@@ -1,0 +1,35 @@
+#extend("layouts/main"):
+    #export("body"):
+        <h1>Edit Post</h1>
+
+        <div style="margin-bottom: 20px;">
+            <a href="/posts/#(post.id)">Back to post</a>
+        </div>
+
+        <div>
+            <form action="/posts/#(post.id)/put" method="POST">
+                <label style="margin-bottom: 20px; display: block;">
+                    Title
+                    <input name="title" placeholder="Title" value="#(post.title)"
+                        required>
+                </label>
+
+                <label style="margin-bottom: 20px; display: block;">
+                    Content<br>
+                    <textarea name="content" placeholder="content"
+                        required>#(post.content)</textarea>
+                </label>
+
+                <label style="margin-bottom: 20px; display: block;">
+                    Author
+                    <input name="author" placeholder="Author" value="#(post.author)"
+                        required>
+                </label>
+
+                <button type="submit"
+                    style="margin-bottom: 20px; display: block;">Update
+                    Post</button>
+            </form>
+        </div>
+    #endexport
+#endextend

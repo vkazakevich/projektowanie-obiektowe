@@ -102,21 +102,26 @@ Kod: [Sonar](<./Sonar>)
 
 :white_check_mark: 4.0 wymaganie 3 [Link do commita 3](https://github.com/vkazakevich/projektowanie-obiektowe/commit/75e7ef5acda3471d0bffe0bb65679741d7d2e84c)
 
-:white_check_mark: 4.5 wymaganie 3 [Link do commita 4](https://github.com/vkazakevich/projektowanie-obiektowe/commit/ab1def71c9315344416505706a141d99a425002f)
+:white_check_mark: 4.5 wymaganie 4 [Link do commita 4](https://github.com/vkazakevich/projektowanie-obiektowe/commit/ab1def71c9315344416505706a141d99a425002f)
 
-:white_check_mark: 5.0 wymaganie 3 [Link do commita 5](https://github.com/vkazakevich/projektowanie-obiektowe/commit/8da8bd7fc5da75505de6267a8f693c7880ac81e4)
+:white_check_mark: 5.0 wymaganie 5 [Link do commita 5](https://github.com/vkazakevich/projektowanie-obiektowe/commit/8da8bd7fc5da75505de6267a8f693c7880ac81e4)
 
 
 Kod: [Swift](<./Swift>)
 
-**Zadanie 8** Tests [WIP]
+Link: [Link](https://po-swift-824cc8171273.herokuapp.com/)
+
+**Zadanie 8** Tests
 
 :white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/vkazakevich/projektowanie-obiektowe/commit/8f115039a8d93dfba1574c59563933e6193f43ca)
 
 :white_check_mark: 3.5 wymaganie 2 [Link do commita 2](https://github.com/vkazakevich/projektowanie-obiektowe/commit/ae511afe01f2a7b62764c8e32bf6099aa4a8ac5b)
 
-<!-- 
-:white_check_mark: 4.5 wymaganie 4 [Link do commita 4](https://github.com/vkazakevich/projektowanie-obiektowe/commit/2ad3dba39e3f3a1cfa13c941e8760f0e4c92c334) -->
+:white_check_mark: 4.0 wymaganie 3 [Link do commita 3](https://github.com/vkazakevich/projektowanie-obiektowe/commit/b9299c9d4afffac8d1227225cbc84921d60a50e9) [Dodatkowe testy](https://github.com/vkazakevich/projektowanie-obiektowe/commit/0145e8013c96f03412989e9636cd8bfa835b1ece)
+
+:white_check_mark: 4.5 wymaganie 4 [Link do commita 4](https://github.com/vkazakevich/projektowanie-obiektowe/commit/2ad3dba39e3f3a1cfa13c941e8760f0e4c92c334)
+
+:white_check_mark: 5.0 wymaganie 5 [Link do commita 5](https://github.com/vkazakevich/projektowanie-obiektowe/commit/351b225adbaf6c8750558262e79acb23a764b70e)
 
 
 Kod: [Tests](<./Tests>)

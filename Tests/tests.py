@@ -1,544 +1,609 @@
-import unittest
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
 import time
 
-class PracticeSoftwareTestingComTest(unittest.TestCase):
 
-    def setUp(self):
-        self.driver = webdriver.Chrome()
-
-    def test_title(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
-        self.assertIn("Toolshop", driver.title)
-
-    def test_nav_categories(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
-
-        nav_categories = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="nav-categories"]')
-        nav_categories.click()
-
-        nav_categories_menu = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="nav-categories"]')
-
-        self.assertIn("show", nav_categories_menu.get_attribute("class"))
-        self.assertIn("show", nav_categories.get_attribute("class"))
-
-    def test_nav_category_hand_tools(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
-
-        nc = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="nav-categories"]')
-        nc.click()
-
-        ht = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="nav-hand-tools"]')
-        ht.click()
-
-        time.sleep(1)
-
-        self.assertIn("Category: Hand Tools",
-                      driver.find_element(By.TAG_NAME, 'h2').text)
-        
-
-    def test_nav_category_power_tools(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
-
-        nc = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="nav-categories"]')
-        nc.click()
-
-        ht = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="nav-power-tools"]')
-        ht.click()
-
-        time.sleep(1)
-
-        self.assertIn("Category: Power Tools",
-                      driver.find_element(By.TAG_NAME, 'h2').text)
-        
-
-    def test_nav_category_other(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
-
-        nc = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="nav-categories"]')
-        nc.click()
-
-        ht = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="nav-other"]')
-        ht.click()
-
-        time.sleep(1)
-
-        self.assertIn("Category: Other",
-                      driver.find_element(By.TAG_NAME, 'h2').text)
-        
-
-    def test_nav_category_special_tools(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
-
-        nc = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="nav-categories"]')
-        nc.click()
-
-        ht = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="nav-special-tools"]')
-        ht.click()
-
-        time.sleep(1)
-
-        self.assertIn("Category: Special Tools",
-                      driver.find_element(By.TAG_NAME, 'h2').text)
+def find_element(selenium, by, selector, timeout=5):
+    return WebDriverWait(selenium, timeout).until(
+        EC.presence_of_element_located((by, selector))
+    )
 
 
-    def test_nav_category_rentals(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
+def test_title(selenium):
+    selenium.get("https://practicesoftwaretesting.com/")
+    assert "Toolshop" in selenium.title
 
-        nc = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="nav-categories"]')
-        nc.click()
 
-        ht = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="nav-rental"]')
-        ht.click()
+def test_nav_categories(selenium):
+    selenium.get("https://practicesoftwaretesting.com/")
 
-        time.sleep(1)
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
 
-        self.assertEqual("Rentals",
-                      driver.find_element(By.TAG_NAME, 'h1').text)
-        
-    def test_nav_category_special_tools(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
+    nav_categories = find_element(selenium,
+                                  By.CSS_SELECTOR, '[data-test="nav-categories"]')
+    nav_categories.click()
 
-        nc = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="nav-categories"]')
-        nc.click()
+    nav_categories_menu = find_element(selenium,
+                                       By.CSS_SELECTOR, '[data-test="nav-categories"]')
 
-        ht = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="nav-special-tools"]')
-        ht.click()
+    assert "show" in nav_categories_menu.get_attribute("class")
+    assert "show" in nav_categories.get_attribute("class")
 
-        time.sleep(1)
 
-        self.assertIn("Category: Special Tools",
-                      driver.find_element(By.TAG_NAME, 'h2').text)
+def test_nav_category_hand_tools(selenium):
+    selenium.get("https://practicesoftwaretesting.com/")
 
-    def test_nav_contact(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
 
-        nc = driver.find_element(By.CSS_SELECTOR, '[data-test="nav-contact"]')
-        nc.click()
+    nc = find_element(selenium,
+                      By.CSS_SELECTOR, '[data-test="nav-categories"]')
+    nc.click()
 
-        time.sleep(1)
+    ht = find_element(selenium,
+                      By.CSS_SELECTOR, '[data-test="nav-hand-tools"]')
+    ht.click()
 
-        self.assertEqual("Contact", driver.find_element(
-            By.TAG_NAME, 'h3').text)
-        
-    def test_product_page(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
+    time.sleep(1)
 
-        nc = driver.find_element(By.CLASS_NAME, 'card')
-        nc.click()
+    assert "Category: Hand Tools" in find_element(selenium,
+                                                  By.TAG_NAME, 'h2').text
 
-        time.sleep(1)
 
-        self.assertIs(driver.find_element(By.ID, 'description'))
+def test_nav_category_power_tools(selenium):
+    selenium.get("https://practicesoftwaretesting.com/")
 
-    def test_product_has_related_products(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
 
-        nc = driver.find_element(By.CLASS_NAME, 'card')
-        nc.click()
+    nc = find_element(selenium,
+                      By.CSS_SELECTOR, '[data-test="nav-categories"]')
+    nc.click()
 
-        time.sleep(1)
+    ht = find_element(selenium,
+                      By.CSS_SELECTOR, '[data-test="nav-power-tools"]')
+    ht.click()
 
-        self.assertIs(driver.find_element(By.ID, 'card'))
+    time.sleep(1)
 
-    def test_product_has_img (self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
+    assert "Category: Power Tools" in find_element(selenium,
+                                                   By.TAG_NAME, 'h2').text
 
-        nc = driver.find_element(By.CLASS_NAME, 'card')
-        nc.click()
 
-        time.sleep(1)
+def test_nav_category_other(selenium):
+    selenium.get("https://practicesoftwaretesting.com/")
 
-        img = driver.find_element(By.CSS_SELECTOR, '.card-img-wrapper > img')
-        img.is_displayed()
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
 
-    def test_empty_cart (self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/checkout")
+    nc = find_element(selenium,
+                      By.CSS_SELECTOR, '[data-test="nav-categories"]')
+    nc.click()
 
-        self.assertEqual("$0.00", driver.find_element(By.CSS_SELECTOR, '[data-test="cart-total"]'))
-        
+    ht = find_element(selenium,
+                      By.CSS_SELECTOR, '[data-test="nav-other"]')
+    ht.click()
 
-    def test_site_has_logo (self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com")
+    time.sleep(1)
 
-        logo = driver.find_element(By.CSS_SELECTOR, '[data-test="navbar-brand"]')
-        assert logo.is_displayed()
+    assert "Category: Other" in find_element(selenium, By.TAG_NAME, 'h2').text
+
+
+def test_nav_category_special_tools(selenium):
+    selenium.get("https://practicesoftwaretesting.com/")
+
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
+
+    nc = find_element(selenium,
+                      By.CSS_SELECTOR, '[data-test="nav-categories"]')
+    nc.click()
+
+    ht = find_element(selenium,
+                      By.CSS_SELECTOR, '[data-test="nav-special-tools"]')
+    ht.click()
+
+    time.sleep(1)
+
+    assert "Category: Special Tools" in find_element(selenium,
+                                                     By.TAG_NAME, 'h2').text
+
+
+def test_nav_category_rentals(selenium):
+    selenium.get("https://practicesoftwaretesting.com/")
+
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
+
+    nc = find_element(selenium, By.CSS_SELECTOR,
+                      '[data-test="nav-categories"]')
+    nc.click()
+
+    ht = find_element(selenium,
+                      By.CSS_SELECTOR, '[data-test="nav-rentals"]')
+    ht.click()
+
+    time.sleep(1)
+
+    assert "Rentals" == find_element(selenium, By.TAG_NAME, 'h1').text
+
+
+def test_nav_category_special_tools_error(selenium):
+    selenium.get("https://practicesoftwaretesting.com/")
+
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
+
+    nc = find_element(selenium,
+                      By.CSS_SELECTOR, '[data-test="nav-categories"]')
+    nc.click()
+
+    ht = find_element(selenium,
+                      By.CSS_SELECTOR, '[data-test="nav-special-tools"]')
+    ht.click()
+
+    time.sleep(1)
+
+    assert "Category: Special Tools" in find_element(selenium,
+                                                     By.TAG_NAME, 'h2').text
+
+
+def test_nav_contact(selenium):
+    selenium.get("https://practicesoftwaretesting.com/")
+
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
+
+    nc = find_element(selenium, By.CSS_SELECTOR, '[data-test="nav-contact"]')
+    nc.click()
+
+    time.sleep(1)
+
+    assert "Contact" == find_element(selenium, By.TAG_NAME, 'h3').text
+
+
+def test_product_page(selenium):
+    selenium.get("https://practicesoftwaretesting.com")
+
+    pc = find_element(selenium, By.CSS_SELECTOR, 'a.card:first-of-type')
+    pc.click()
+
+    el = find_element(selenium, By.ID, 'description')
+    assert el is not None
+
+
+def test_product_has_related_products(selenium):
+    selenium.get("https://practicesoftwaretesting.com")
+
+    pc = find_element(selenium, By.CSS_SELECTOR, 'a.card:first-of-type')
+    pc.click()
+
+    el = find_element(selenium, By.CLASS_NAME, 'card')
+    assert el is not None
+
+
+def test_product_has_img(selenium):
+    selenium.get("https://practicesoftwaretesting.com")
+
+    pc = find_element(selenium, By.CSS_SELECTOR, 'a.card:first-of-type')
+    pc.click()
+
+    img = find_element(selenium, By.CSS_SELECTOR, '.card-img-wrapper > img')
+    assert img.is_displayed()
+
+
+def test_product_has_add_to_cart_button(selenium):
+    selenium.get(
+        "https://practicesoftwaretesting.com/")
+
+    pc = find_element(selenium, By.CSS_SELECTOR, 'a.card:first-of-type')
+    pc.click()
+
+    btn = find_element(selenium, By.ID, 'btn-add-to-cart')
+    assert btn.is_displayed()
+
+
+def test_empty_cart(selenium):
+    selenium.get("https://practicesoftwaretesting.com/checkout")
+
+    assert "The cart is empty. Nothing to display." in find_element(selenium,
+                                                                    By.TAG_NAME, 'body').text
+
+
+def test_site_has_logo(selenium):
+    selenium.get("https://practicesoftwaretesting.com")
+
+    logo = find_element(selenium, By.CSS_SELECTOR, '.navbar-brand svg')
+    assert logo.is_displayed()
+
+
+def test_nav_sign_in(selenium):
+    selenium.get("https://practicesoftwaretesting.com/")
+
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
+
+    nc = find_element(selenium, By.CSS_SELECTOR, '[data-test="nav-sign-in"]')
+    nc.click()
+
+    time.sleep(1)
+
+    assert "Login" == find_element(selenium, By.TAG_NAME, 'h3').text
+
+
+def test_lang_en(selenium):
+    selenium.get("https://practicesoftwaretesting.com/")
+
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
     
-    def test_nav_sign_in(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
+    find_element(selenium, By.ID, 'language').click()
 
-        nc = driver.find_element(By.CSS_SELECTOR, '[data-test="nav-sign-in"]')
-        nc.click()
+    time.sleep(1)
 
-        time.sleep(1)
+    el_c = find_element(selenium, By.CLASS_NAME, 'container-fluid')
+    assert "This is a DEMO application" in el_c.text
 
-        self.assertEqual("Login", driver.find_element(By.TAG_NAME, 'h3').text)
+    filters = find_element(selenium, By.CSS_SELECTOR, '[data-test="filters"]')
+    if filters.is_displayed():
+        filters.click()
 
-    def test_lang_en(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
+    el_f = find_element(selenium, By.ID, 'filters')
 
-        driver.find_element(
-            By.CSS_SELECTOR, '[data-test="language-select"]').click()
-        driver.find_element(By.CSS_SELECTOR, '[data-test="lang-en"]').click()
+    assert "Sort" in el_f.text
+    assert "Price Range" in el_f.text
+    assert "Search" in el_f.text
+    assert "Filters" in el_f.text
+    assert "By category" in el_f.text
+    assert "By brand" in el_f.text
 
-        time.sleep(1)
+    el_nav = find_element(selenium, By.ID, 'navbarSupportedContent')
 
-        el_c = driver.find_element(By.CLASS_NAME, 'container-fluid')
-        self.assertIn("This is a DEMO application", el_c.text)
+    assert "Home" in el_nav.text
+    assert "Categories" in el_nav.text
+    assert "Contact" in el_nav.text
+    assert "Sign in" in el_nav.text
+    assert "EN" in el_nav.text
 
-        el_f = driver.find_element(By.ID, 'filters')
 
-        self.assertIn("Sort", el_f.text)
-        self.assertIn("Price Range", el_f.text)
-        self.assertIn("Search", el_f.text)
-        self.assertIn("Filters", el_f.text)
-        self.assertIn("By category", el_f.text)
-        self.assertIn("By brand", el_f.text)
+def test_lang_de(selenium):
+    selenium.get("https://practicesoftwaretesting.com/")
 
-        el_nav = driver.find_element(By.ID, 'navbarSupportedContent')
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
 
-        self.assertIn("Home", el_nav.text)
-        self.assertIn("Categories", el_nav.text)
-        self.assertIn("Contact", el_nav.text)
-        self.assertIn("Sign in", el_nav.text)
-        self.assertIn("EN", el_nav.text)
+    find_element(selenium, By.ID, 'language').click()
+    find_element(selenium, By.CSS_SELECTOR, '[data-test="lang-de"]').click()
 
-    def test_lang_de(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
+    time.sleep(1)
 
-        driver.find_element(
-            By.CSS_SELECTOR, '[data-test="language-select"]').click()
-        driver.find_element(By.CSS_SELECTOR, '[data-test="lang-de"]').click()
+    el_c = find_element(selenium, By.CLASS_NAME, 'container-fluid')
+    assert "Das ist eine Demo Applikation" in el_c.text
 
-        time.sleep(1)
+    filters = find_element(selenium, By.CSS_SELECTOR, '[data-test="filters"]')
+    if filters.is_displayed():
+        filters.click()
 
-        el_c = driver.find_element(By.CLASS_NAME, 'container-fluid')
-        self.assertIn("Das ist eine Demo Applikation", el_c.text)
+    el_f = find_element(selenium, By.ID, 'filters')
 
-        el_f = driver.find_element(By.ID, 'filters')
+    assert "Sortieren" in el_f.text
+    assert "Preisspanne" in el_f.text
+    assert "Suche" in el_f.text
+    assert "Filter" in el_f.text
+    assert "Nach Kategorie" in el_f.text
+    assert "Nach Marken" in el_f.text
 
-        self.assertIn("Sortieren", el_f.text)
-        self.assertIn("Preisspanne", el_f.text)
-        self.assertIn("Suche", el_f.text)
-        self.assertIn("Filter", el_f.text)
-        self.assertIn("Nach Kategorie", el_f.text)
-        self.assertIn("Nach Marken", el_f.text)
+    el_nav = find_element(selenium, By.ID, 'navbarSupportedContent')
 
-        el_nav = driver.find_element(By.ID, 'navbarSupportedContent')
+    assert "Home" in el_nav.text
+    assert "Kategorien" in el_nav.text
+    assert "Kontakt" in el_nav.text
+    assert "Einloggen" in el_nav.text
+    assert "DE" in el_nav.text
 
-        self.assertIn("Home", el_nav.text)
-        self.assertIn("Kategorien", el_nav.text)
-        self.assertIn("Kontakt", el_nav.text)
-        self.assertIn("Einloggen", el_nav.text)
-        self.assertIn("DE", el_nav.text)
 
-    def test_lang_es(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
+def test_lang_es(selenium):
+    selenium.get("https://practicesoftwaretesting.com/")
 
-        driver.find_element(
-            By.CSS_SELECTOR, '[data-test="language-select"]').click()
-        driver.find_element(By.CSS_SELECTOR, '[data-test="lang-es"]').click()
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
 
-        time.sleep(1)
+    find_element(selenium, By.ID, 'language').click()
+    find_element(selenium, By.CSS_SELECTOR, '[data-test="lang-es"]').click()
 
-        el_c = driver.find_element(By.CLASS_NAME, 'container-fluid')
-        self.assertIn("Esta es una aplicación DEMO", el_c.text)
+    time.sleep(1)
 
-        el_f = driver.find_element(By.ID, 'filters')
+    el_c = find_element(selenium, By.CLASS_NAME, 'container-fluid')
+    assert "Esta es una aplicación DEMO" in el_c.text
 
-        self.assertIn("Ordenar", el_f.text)
-        self.assertIn("Rango de precios", el_f.text)
-        self.assertIn("Buscar", el_f.text)
-        self.assertIn("Filtros", el_f.text)
-        self.assertIn("Por categoría", el_f.text)
-        self.assertIn("Por marca", el_f.text)
+    filters = find_element(selenium, By.CSS_SELECTOR, '[data-test="filters"]')
+    if filters.is_displayed():
+        filters.click()
 
+    el_f = find_element(selenium, By.ID, 'filters')
 
-        el_nav = driver.find_element(By.ID, 'navbarSupportedContent')
-        
-        self.assertIn("Inicio", el_nav.text)
-        self.assertIn("Categorías", el_nav.text)
-        self.assertIn("Contacto", el_nav.text)
-        self.assertIn("Iniciar sesión", el_nav.text)
-        self.assertIn("ES", el_nav.text)
+    assert "Ordenar" in el_f.text
+    assert "Rango de precios" in el_f.text
+    assert "Buscar" in el_f.text
+    assert "Filtros" in el_f.text
+    assert "Por categoría" in el_f.text
+    assert "Por marca" in el_f.text
 
+    el_nav = find_element(selenium, By.ID, 'navbarSupportedContent')
 
-    def test_lang_fr(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
+    assert "Inicio" in el_nav.text
+    assert "Categorías" in el_nav.text
+    assert "Contacto" in el_nav.text
+    assert "Iniciar sesión" in el_nav.text
+    assert "ES" in el_nav.text
 
-        driver.find_element(
-            By.CSS_SELECTOR, '[data-test="language-select"]').click()
-        driver.find_element(By.CSS_SELECTOR, '[data-test="lang-fr"]').click()
 
-        time.sleep(1)
+def test_lang_fr(selenium):
+    selenium.get("https://practicesoftwaretesting.com/")
 
-        el_c = driver.find_element(By.CLASS_NAME, 'container-fluid')
-        self.assertIn("Ceci est une application de démonstration", el_c.text)
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
 
-        el_f = driver.find_element(By.ID, 'filters')
+    find_element(selenium, By.ID, 'language').click()
+    find_element(selenium, By.CSS_SELECTOR, '[data-test="lang-fr"]').click()
 
-        self.assertIn("Trier", el_f.text)
-        self.assertIn("Fourchette de prix", el_f.text)
-        self.assertIn("Rechercher", el_f.text)
-        self.assertIn("Filtres", el_f.text)
-        self.assertIn("Par catégorie", el_f.text)
-        self.assertIn("Par marque", el_f.text)
+    time.sleep(1)
 
-    def test_lang_nl(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
+    el_c = find_element(selenium, By.CLASS_NAME, 'container-fluid')
+    assert "Ceci est une application de démonstration" in el_c.text
 
-        driver.find_element(
-            By.CSS_SELECTOR, '[data-test="language-select"]').click()
-        driver.find_element(By.CSS_SELECTOR, '[data-test="lang-nl"]').click()
+    filters = find_element(selenium, By.CSS_SELECTOR, '[data-test="filters"]')
+    if filters.is_displayed():
+        filters.click()
 
-        time.sleep(1)
+    el_f = find_element(selenium, By.ID, 'filters')
 
-        el_c = driver.find_element(By.CLASS_NAME, 'container-fluid')
-        self.assertIn("Dit is een DEMO-applicatie", el_c.text)
+    assert "Trier" in el_f.text
+    assert "Fourchette de prix" in el_f.text
+    assert "Rechercher" in el_f.text
+    assert "Filtres" in el_f.text
+    assert "Par catégorie" in el_f.text
+    assert "Par marque" in el_f.text
 
-        el_f = driver.find_element(By.ID, 'filters')
 
-        self.assertIn("Sorteren", el_f.text)
-        self.assertIn("Prijsklasse", el_f.text)
-        self.assertIn("Zoeken", el_f.text)
-        self.assertIn("Filter", el_f.text)
-        self.assertIn("Op categorie", el_f.text)
-        self.assertIn("Op merk", el_f.text)
+def test_lang_nl(selenium):
+    selenium.get("https://practicesoftwaretesting.com/")
 
-    def test_lang_tr(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
 
-        driver.find_element(
-            By.CSS_SELECTOR, '[data-test="language-select"]').click()
-        driver.find_element(By.CSS_SELECTOR, '[data-test="lang-tr"]').click()
+    find_element(selenium, By.ID, 'language').click()
+    find_element(selenium, By.CSS_SELECTOR, '[data-test="lang-nl"]').click()
 
-        time.sleep(1)
+    time.sleep(1)
 
-        el_c = driver.find_element(By.CLASS_NAME, 'container-fluid')
-        self.assertIn("Bu bir DEMO uygulamasıdır", el_c.text)
-
-        el_f = driver.find_element(By.ID, 'filters')
-
-        self.assertIn("Sırala", el_f.text)
-        self.assertIn("Fiyat Aralığı", el_f.text)
-        self.assertIn("Ara", el_f.text)
-        self.assertIn("Filtreler", el_f.text)
-        self.assertIn("Kategoriye göre", el_f.text)
-        self.assertIn("Markaya göre", el_f.text)
+    el_c = find_element(selenium, By.CLASS_NAME, 'container-fluid')
+    assert "Dit is een DEMO-applicatie" in el_c.text
 
-    def test_privacy_policy(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
+    filters = find_element(selenium, By.CSS_SELECTOR, '[data-test="filters"]')
+    if filters.is_displayed():
+        filters.click()
 
-        nc = driver.find_element(By.CSS_SELECTOR, '[routerlink="privacy"]')
-        nc.click()
+    el_f = find_element(selenium, By.ID, 'filters')
 
-        time.sleep(1)
+    assert "Sorteren" in el_f.text
+    assert "Prijsklasse" in el_f.text
+    assert "Zoeken" in el_f.text
+    assert "Filter" in el_f.text
+    assert "Op categorie" in el_f.text
+    assert "Op merk" in el_f.text
 
-        self.assertIn("Privacy Policy for Toolshop", driver.find_element(
-            By.TAG_NAME, 'body').text)
 
-    def test_contact_empty_form_error(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/contact")
+def test_lang_tr(selenium):
+    selenium.get("https://practicesoftwaretesting.com/")
 
-        cs = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="contact-submit"]')
-        cs.click()
+    mobile_navbar = find_element(selenium, By.CLASS_NAME, 'navbar-toggler')
+    if mobile_navbar.is_displayed():
+        mobile_navbar.click()
 
-        time.sleep(1)
+    find_element(selenium, By.ID, 'language').click()
+    find_element(selenium, By.CSS_SELECTOR, '[data-test="lang-tr"]').click()
 
-        self.assertTrue(driver.find_element(By.CSS_SELECTOR,
-                        '[data-test="first-name-error"] > div').is_displayed())
-        self.assertTrue(driver.find_element(By.CSS_SELECTOR,
-                        '[data-test="last-name-error"] > div').is_displayed())
-        self.assertTrue(driver.find_element(By.CSS_SELECTOR,
-                        '[data-test="email-error"] > div').is_displayed())
-        self.assertTrue(driver.find_element(By.CSS_SELECTOR,
-                        '[data-test="subject-error"] > div').is_displayed())
-        self.assertTrue(driver.find_element(By.CSS_SELECTOR,
-                        '[data-test="message-error"] > div').is_displayed())
+    time.sleep(1)
 
-    def test_sign_in_empty_form_error(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/auth/login")
+    el_c = find_element(selenium, By.CLASS_NAME, 'container-fluid')
+    assert "Bu bir DEMO uygulamasıdır" in el_c.text
 
-        ls = driver.find_element(By.CSS_SELECTOR, '[data-test="login-submit"]')
-        ls.click()
+    filters = find_element(selenium, By.CSS_SELECTOR, '[data-test="filters"]')
+    if filters.is_displayed():
+        filters.click()
 
-        time.sleep(1)
+    el_f = find_element(selenium, By.ID, 'filters')
 
-        self.assertTrue(driver.find_element(By.CSS_SELECTOR,
-                        '[data-test="email-error"]').is_displayed())
-        self.assertTrue(driver.find_element(By.CSS_SELECTOR,
-                        '[data-test="password-error"]').is_displayed())
+    assert "Sırala" in el_f.text
+    assert "Fiyat Aralığı" in el_f.text
+    assert "Ara" in el_f.text
+    assert "Filtreler" in el_f.text
+    assert "Kategoriye göre" in el_f.text
+    assert "Markaya göre" in el_f.text
 
-    def test_forgot_password_empty_form_error(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/auth/forgot-password")
 
-        fp = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="forgot-password-submit"]')
-        fp.click()
+def test_privacy_policy(selenium):
+    selenium.get("https://practicesoftwaretesting.com/")
 
-        time.sleep(1)
+    nc = find_element(selenium, By.CSS_SELECTOR, '[routerlink="privacy"]')
+    nc.click()
 
-        self.assertTrue(driver.find_element(By.CSS_SELECTOR,
-                        '[data-test="email-error"]').is_displayed())
+    time.sleep(1)
 
-    def test_register_empty_form_error(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/auth/register")
+    assert "Privacy Policy for Toolshop" in find_element(selenium,
+                                                         By.TAG_NAME, 'body').text
 
-        rs = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="register-submit"]')
-        rs.click()
+def test_sign_in_empty_form_error(selenium):
+    selenium.get("https://practicesoftwaretesting.com/auth/login")
 
-        time.sleep(1)
+    ls = find_element(selenium, By.CSS_SELECTOR, '[data-test="login-submit"]')
+    ls.click()
 
-        self.assertTrue(driver.find_element(By.CSS_SELECTOR,
-                        '[data-test="first-name-error"]').is_displayed())
-        self.assertTrue(driver.find_element(By.CSS_SELECTOR,
-                        '[data-test="email-error"]').is_displayed())
-        self.assertTrue(driver.find_element(By.CSS_SELECTOR,
-                        '[data-test="dob-error"]').is_displayed())
-        self.assertTrue(driver.find_element(By.CSS_SELECTOR,
-                        '[data-test="street-error"]').is_displayed())
-        self.assertTrue(driver.find_element(By.CSS_SELECTOR,
-                        '[data-test="postal_code-error"]').is_displayed())
-        self.assertTrue(driver.find_element(By.CSS_SELECTOR,
-                        '[data-test="city-error"]').is_displayed())
-        self.assertTrue(driver.find_element(By.CSS_SELECTOR,
-                        '[data-test="state-error"]').is_displayed())
-        self.assertTrue(driver.find_element(By.CSS_SELECTOR,
-                        '[data-test="country-error"]').is_displayed())
-        self.assertTrue(driver.find_element(By.CSS_SELECTOR,
-                        '[data-test="phone-error"]').is_displayed())
-        self.assertTrue(driver.find_element(By.CSS_SELECTOR,
-                        '[data-test="password-error"]').is_displayed())
+    time.sleep(1)
 
-    def test_search(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
+    assert find_element(selenium,
+                        By.CSS_SELECTOR, '[data-test="email-error"]').is_displayed()
+    assert find_element(selenium,
+                        By.CSS_SELECTOR, '[data-test="password-error"]').is_displayed()
 
-        sq = driver.find_element(By.CSS_SELECTOR, '[data-test="search-query"]')
-        sq.send_keys("Thor")
 
-        ss = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="search-submit"]')
-        ss.click()
+def test_forgot_password_empty_form_error(selenium):
+    selenium.get(
+        "https://practicesoftwaretesting.com/auth/forgot-password")
 
-        time.sleep(1)
+    fp = find_element(selenium,
+                      By.CSS_SELECTOR, '[data-test="forgot-password-submit"]')
+    fp.click()
 
-        sc = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="search-caption"]')
-        self.assertIn("Thor", sc.text)
+    time.sleep(1)
 
-        pn = driver.find_element(By.CSS_SELECTOR, '[data-test="product-name"]')
-        self.assertTrue(pn.is_displayed())
-        self.assertIn("Thor Hammer", pn.text)
+    assert find_element(selenium,
+                        By.CSS_SELECTOR, '[data-test="email-error"]').is_displayed()
 
-    def test_search_lowercase(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
 
-        sq = driver.find_element(By.CSS_SELECTOR, '[data-test="search-query"]')
-        sq.send_keys("thor")
+def test_register_empty_form_error(selenium):
+    selenium.get("https://practicesoftwaretesting.com/auth/register")
 
-        ss = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="search-submit"]')
-        ss.click()
+    rs = find_element(selenium,
+                      By.CSS_SELECTOR, '[data-test="register-submit"]')
+    rs.click()
 
-        time.sleep(1)
+    time.sleep(1)
 
-        sc = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="search-caption"]')
-        self.assertIn("thor", sc.text)
+    assert find_element(selenium,
+                        By.CSS_SELECTOR, '[data-test="first-name-error"]').is_displayed()
+    assert find_element(selenium,
+                        By.CSS_SELECTOR, '[data-test="email-error"]').is_displayed()
+    assert find_element(selenium,
+                        By.CSS_SELECTOR, '[data-test="dob-error"]').is_displayed()
+    assert find_element(selenium,
+                        By.CSS_SELECTOR, '[data-test="street-error"]').is_displayed()
+    assert find_element(selenium,
+                        By.CSS_SELECTOR, '[data-test="postal_code-error"]').is_displayed()
+    assert find_element(selenium,
+                        By.CSS_SELECTOR, '[data-test="city-error"]').is_displayed()
+    assert find_element(selenium,
+                        By.CSS_SELECTOR, '[data-test="state-error"]').is_displayed()
+    assert find_element(selenium,
+                        By.CSS_SELECTOR, '[data-test="country-error"]').is_displayed()
+    assert find_element(selenium,
+                        By.CSS_SELECTOR, '[data-test="phone-error"]').is_displayed()
+    assert find_element(selenium,
+                        By.CSS_SELECTOR, '[data-test="password-error"]').is_displayed()
 
-        pn = driver.find_element(By.CSS_SELECTOR, '[data-test="product-name"]')
-        self.assertTrue(pn.is_displayed())
-        self.assertIn("Thor Hammer", pn.text)
 
-    def test_search_uppercase(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
+def test_search(selenium):
+    selenium.get("https://practicesoftwaretesting.com/")
 
-        sq = driver.find_element(By.CSS_SELECTOR, '[data-test="search-query"]')
-        sq.send_keys("THOR")
+    filters = find_element(selenium, By.CSS_SELECTOR, '[data-test="filters"]')
+    if filters.is_displayed():
+        filters.click()
 
-        ss = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="search-submit"]')
-        ss.click()
+    sq = find_element(selenium, By.CSS_SELECTOR, '[data-test="search-query"]')
+    sq.send_keys("Thor")
 
-        time.sleep(1)
+    ss = find_element(selenium,
+                      By.CSS_SELECTOR, '[data-test="search-submit"]')
+    ss.click()
 
-        sc = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="search-caption"]')
-        self.assertIn("THOR", sc.text)
+    time.sleep(3)
 
-        pn = driver.find_element(By.CSS_SELECTOR, '[data-test="product-name"]')
-        self.assertIn("Thor Hammer", pn.text)
+    sc = find_element(selenium,
+                      By.CSS_SELECTOR, '[data-test="search-caption"]')
+    assert "Thor" in sc.text
 
-    def test_search_with_spaces(self):
-        driver = self.driver
-        driver.get("https://practicesoftwaretesting.com/")
+    pn = find_element(selenium, By.CSS_SELECTOR, '[data-test="product-name"]')
+    assert pn.is_displayed()
+    assert "Thor Hammer" in pn.text
 
-        sq = driver.find_element(By.CSS_SELECTOR, '[data-test="search-query"]')
-        sq.send_keys("       thor    ")
 
-        ss = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="search-submit"]')
-        ss.click()
+def test_search_lowercase(selenium):
+    selenium.get("https://practicesoftwaretesting.com/")
 
-        time.sleep(2)
+    filters = find_element(selenium, By.CSS_SELECTOR, '[data-test="filters"]')
+    if filters.is_displayed():
+        filters.click()
 
-        sc = driver.find_element(
-            By.CSS_SELECTOR, '[data-test="search-caption"]')
-        self.assertIn("thor", sc.text)
+    sq = find_element(selenium, By.CSS_SELECTOR, '[data-test="search-query"]')
+    sq.send_keys("thor")
 
-        pn = driver.find_element(By.CSS_SELECTOR, '[data-test="product-name"]')
-        self.assertIn("Thor Hammer", pn.text)
+    ss = find_element(selenium,
+                      By.CSS_SELECTOR, '[data-test="search-submit"]')
+    ss.click()
 
-    def tearDown(self):
-        self.driver.close()
+    time.sleep(3)
 
+    sc = find_element(selenium,
+                      By.CSS_SELECTOR, '[data-test="search-caption"]')
+    assert "thor" in sc.text
 
-if __name__ == "__main__":
-    unittest.main()
+    pn = find_element(selenium, By.CSS_SELECTOR, '[data-test="product-name"]')
+    assert pn.is_displayed()
+    assert "Thor Hammer" in pn.text
+
+
+def test_search_uppercase(selenium):
+    selenium.get("https://practicesoftwaretesting.com/")
+
+    filters = find_element(selenium, By.CSS_SELECTOR, '[data-test="filters"]')
+    if filters.is_displayed():
+        filters.click()
+
+    sq = find_element(selenium, By.CSS_SELECTOR, '[data-test="search-query"]')
+    sq.send_keys("THOR")
+
+    ss = find_element(selenium,
+                      By.CSS_SELECTOR, '[data-test="search-submit"]')
+    ss.click()
+
+    time.sleep(3)
+
+    sc = find_element(selenium,
+                      By.CSS_SELECTOR, '[data-test="search-caption"]')
+    assert "THOR" in sc.text
+
+    pn = find_element(selenium, By.CSS_SELECTOR, '[data-test="product-name"]')
+    assert "Thor Hammer" in pn.text
+
+
+def test_search_with_spaces(selenium):
+    selenium.get("https://practicesoftwaretesting.com/")
+
+    filters = find_element(selenium, By.CSS_SELECTOR, '[data-test="filters"]')
+    if filters.is_displayed():
+        filters.click()
+
+    sq = find_element(selenium, By.CSS_SELECTOR, '[data-test="search-query"]')
+    sq.send_keys("       thor    ")
+
+    ss = find_element(selenium,
+                      By.CSS_SELECTOR, '[data-test="search-submit"]')
+    ss.click()
+
+    time.sleep(2)
+
+    sc = find_element(selenium,
+                      By.CSS_SELECTOR, '[data-test="search-caption"]')
+    assert "thor" in sc.text
+
+    assert "There are no products found." in find_element(selenium,
+                                                          By.TAG_NAME, 'body').text

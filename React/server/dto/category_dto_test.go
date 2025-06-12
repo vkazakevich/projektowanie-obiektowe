@@ -7,16 +7,17 @@ import (
 	"github.com/vkazakevich/ebiznes/Go/models"
 )
 
-func fakeCategoryDto() (*CategoryDTO) {
+func fakeCategoryDto() *CategoryDTO {
 	return &CategoryDTO{
 		Name: "Test Category",
 	}
 }
 
-func TestCategoryDto (t *testing.T) {
+func TestCategoryDto(t *testing.T) {
 	dto := fakeCategoryDto()
 
-    assert.NotNil(t, dto)
+	assert.NotNil(t, dto)
+	assert.NotNil(t, dto.Name)
 
 	assert.Equal(t, "Test Category", dto.Name)
 }
@@ -28,6 +29,8 @@ func TestCategoryDtoModel(t *testing.T) {
 	c := models.Category{Name: dto.Name}
 	db.Create(&c)
 
-	assert.Equal(t, c.Name, dto.Name)
 	assert.NotNil(t, c.ID)
+	assert.NotNil(t, c.Name)
+
+	assert.Equal(t, c.Name, dto.Name)
 }

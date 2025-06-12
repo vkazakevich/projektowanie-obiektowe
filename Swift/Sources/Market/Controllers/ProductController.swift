@@ -59,6 +59,8 @@ struct ProductController: RouteCollection {
         let product = try req.content.decode(ProductDTO.self).toModel()
         try await product.save(on: req.db)
 
+        _ = req.redis.delete(.init(ProductController.cacheKey))
+
         return req.redirect(to: "/products")
     }
 
@@ -96,6 +98,8 @@ struct ProductController: RouteCollection {
 
         try await product.update(on: req.db)
 
+        _ = req.redis.delete(.init(ProductController.cacheKey))
+
         return req.redirect(to: "/products")
     }
 
@@ -107,6 +111,8 @@ struct ProductController: RouteCollection {
         }
 
         try await product.delete(on: req.db)
+        
+        _ = req.redis.delete(.init(ProductController.cacheKey))
 
         return req.redirect(to: "/products")
     }
