@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.app.screens.CartScreen
 import com.example.app.screens.CategoriesScreen
 import com.example.app.utils.Seeds
 
@@ -50,7 +51,7 @@ fun Main() {
                     NavHost(navController, startDestination = NavRoutes.Products.route) {
                         composable(NavRoutes.Products.route) { ProductsScreen() }
                         composable(NavRoutes.Categories.route) { CategoriesScreen() }
-                        composable(NavRoutes.Cart.route) { ProductsScreen() }
+                        composable(NavRoutes.Cart.route) { CartScreen() }
                     }
                 }
             }
