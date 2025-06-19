@@ -4,46 +4,51 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.example.app.screens.ProductsScreen
+import com.example.app.ui.theme.AppTheme
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Card
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.app.models.Category
-import com.example.app.models.Product
-import com.example.app.ui.theme.AppTheme
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import com.example.app.screens.CategoriesScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            AppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Row (modifier = Modifier.padding(innerPadding)) {
-                        val categories = listOf(
-                            Category("Apple"),
-                            Category("Asus"),
-                            Category("Lenovo"),
-                        )
+            Main()
+        }
+    }
+}
 
-                        val products = listOf(
-                            Product(name = "Macbook Air M1", category = categories[0], price = 199),
-                            Product(name = "Macbook Air M2", category = categories[0], price = 299),
-                            Product(name = "Macbook Air M3", category = categories[0], price = 399),
-                        )
+@Composable
+fun Main() {
+    AppTheme {
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            Row(modifier = Modifier.padding(innerPadding)) {
+                val navController = rememberNavController()
 
-                        ProductList(products)
-                        CategoryList(categories)
+                Column(Modifier.padding(8.dp)) {
+                    NavBar(navController = navController)
+                    NavHost(navController, startDestination = NavRoutes.Products.route) {
+                        composable(NavRoutes.Products.route) { ProductsScreen() }
+                        composable(NavRoutes.Categories.route) { CategoriesScreen() }
+                        composable(NavRoutes.Cart.route) { ProductsScreen() }
                     }
                 }
             }
@@ -52,47 +57,47 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ProductList(products: List<Product>) {
-    Row {
-        Text("Products", color = Color.Blue)
-
-        Column {
-            products.forEach { product ->
-                ProductRow(product)
-            }
-        }
+fun NavBar(navController: NavController) {
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .padding(bottom = 8.dp)
+    ) {
+        Text(
+            "Products",
+            Modifier
+                .weight(0.33f)
+                .clickable { navController.navigate(NavRoutes.Products.route) },
+            fontSize = 22.sp,
+            color = Color(0xFF6650a4)
+        )
+        Text(
+            "Categories",
+            Modifier
+                .weight(0.33f)
+                .clickable { navController.navigate(NavRoutes.Categories.route) },
+            fontSize = 22.sp,
+            color = Color(0xFF6650a4)
+        )
+        Text(
+            "Cart",
+            Modifier
+                .weight(0.33f)
+                .clickable { navController.navigate(NavRoutes.Cart.route) },
+            fontSize = 22.sp,
+            color = Color(0xFF6650a4)
+        )
     }
 }
 
-@Composable
-fun CategoryList(categories: List<Category>) {
-    Row {
-        Text("Categories", color = Color.Blue)
-
-        Column {
-            categories.forEach { category ->
-                Card {
-                    Column {
-                        Text(category.name)
-                    }
-                }
-            }
-        }
-    }
+sealed class NavRoutes(val route: String) {
+    object Products : NavRoutes("products")
+    object Categories : NavRoutes("categories")
+    object Cart : NavRoutes("cart")
 }
 
+@Preview(showBackground = true)
 @Composable
-fun ProductRow(
-    product: Product
-) {
-    Card(modifier = Modifier.padding(8.dp)) {
-        Column (
-            modifier = Modifier.padding(8.dp),
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(product.name)
-            Text(product.category.name)
-            Text("$" + product.price.toString())
-        }
-    }
+fun MainPreview() {
+    Main()
 }
