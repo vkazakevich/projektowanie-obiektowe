@@ -129,3 +129,5 @@ Kod: [Tests](<./Tests>)
 **Zadanie 9** Android (Kotlin) **[WIP]**
 
 :white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/vkazakevich/projektowanie-obiektowe/commit/f8e2ce9090cfad8ba5873fc526cf03a536c78d69)
+
+:white_check_mark: 3.5 wymaganie 1 [Link do commita 2](https://github.com/vkazakevich/projektowanie-obiektowe/commit/98515205d2f4bf757c5d1dc7cd463eddb9da236b)
