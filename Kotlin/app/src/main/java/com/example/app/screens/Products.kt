@@ -11,23 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.app.models.Category
 import com.example.app.models.Product
+import com.example.app.models.products
 
 @Composable
 fun ProductsScreen() {
-    val categories = listOf(
-        Category("Apple"),
-        Category("Asus"),
-        Category("Lenovo"),
-    )
-
-    val products = listOf(
-        Product(name = "Macbook Air M1", category = categories[0], price = 199),
-        Product(name = "Macbook Air M2", category = categories[0], price = 299),
-        Product(name = "Macbook Air M3", category = categories[0], price = 399),
-    )
-
     productList(products)
 }
 

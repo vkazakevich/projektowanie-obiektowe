@@ -13,16 +13,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.app.models.Category
-import com.example.app.models.Product
+import com.example.app.models.categories
 
 @Composable
 fun CategoriesScreen() {
-    val categories = listOf(
-        Category("Apple"),
-        Category("Asus"),
-        Category("Lenovo"),
-    )
-
     categoryList(categories)
 }
 

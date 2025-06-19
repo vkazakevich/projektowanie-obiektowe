@@ -25,11 +25,13 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.app.screens.CategoriesScreen
+import com.example.app.utils.Seeds
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        Seeds.fill()
         setContent {
             Main()
         }
