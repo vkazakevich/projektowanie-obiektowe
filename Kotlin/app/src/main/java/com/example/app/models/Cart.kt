@@ -1,11 +1,12 @@
 package com.example.app.models
 
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import kotlinx.serialization.Serializable
+import io.realm.kotlin.types.RealmObject
+import io.realm.kotlin.types.annotations.PrimaryKey
+import org.mongodb.kbson.ObjectId
 
-@Serializable
-data class Cart(val productID: String, val amount: MutableState<Int> = mutableStateOf(1))
-
-val cartItems = mutableStateListOf<Cart>()
+class Cart : RealmObject {
+    @PrimaryKey
+    var _id: ObjectId = ObjectId()
+    var product: Product? = null
+    var amount: Int = 0
+}

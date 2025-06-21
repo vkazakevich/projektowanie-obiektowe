@@ -1,9 +1,13 @@
 package com.example.app.models
 
-import kotlinx.serialization.Serializable
-import java.util.UUID
+import io.realm.kotlin.types.RealmObject
+import io.realm.kotlin.types.annotations.PrimaryKey
+import org.mongodb.kbson.ObjectId
 
-@Serializable
-data class Product(val id: String = UUID.randomUUID().toString(), val name: String, val category: Category, val price: Int)
-
-val products = mutableListOf<Product>()
+class Product : RealmObject {
+    @PrimaryKey
+    var _id: ObjectId = ObjectId()
+    var name: String = ""
+    var price: Double = 0.0
+    var category: Category? = null
+}

@@ -1,8 +1,11 @@
 package com.example.app.models
 
-import kotlinx.serialization.Serializable
+import io.realm.kotlin.types.RealmObject
+import io.realm.kotlin.types.annotations.PrimaryKey
+import org.mongodb.kbson.ObjectId
 
-@Serializable
-data class Category(val name: String)
-
-val categories = mutableListOf<Category>()
+class Category : RealmObject {
+    @PrimaryKey
+    var _id: ObjectId = ObjectId()
+    var name: String = ""
+}

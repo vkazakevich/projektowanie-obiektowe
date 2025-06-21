@@ -2,37 +2,38 @@ package com.example.app.utils
 
 import com.example.app.models.Category
 import com.example.app.models.Product
-import com.example.app.models.categories
-import com.example.app.models.products
+import com.example.app.providers.RealmProvider
 
 object Seeds {
     fun fill() {
-        categories.addAll(
-            listOf(
-                Category(name = "Mobile phones"),
-                Category(name = "Game consoles"),
-                Category(name = "Laptops")
+        val realm = RealmProvider.realm
+
+        realm.writeBlocking {
+            deleteAll()
+        }
+
+        realm.writeBlocking {
+            val seedsData = mapOf(
+                "Mobile phones" to listOf("iPhone", "Samsung", "Xiaomi"),
+                "Game consoles" to listOf("PlayStation 5", "Xbox", "Nintendo Switch"),
+                "Laptops" to listOf("Macbook", "HP", "Lenovo", "Acer")
             )
-        )
 
-        categories.forEach {
-            val productsNames = mutableListOf<String>();
+            seedsData.forEach { (categoryName, productNames) ->
+                val category = copyToRealm(Category().apply {
+                    name = categoryName
+                })
 
-            if (it.name == "Mobile phones") {
-                productsNames.addAll(listOf("iPhone", "Samsung", "Xiaomi"))
+                productNames.forEach { productName ->
+                    val product = Product().apply {
+                        name = productName
+                        price = (100..500).random().toDouble()
+                        this.category = category
+                    }
+
+                    copyToRealm(product)
+                }
             }
-
-            if (it.name == "Game consoles") {
-                productsNames.addAll(listOf("PlayStation 5", "Xbox", "Nintendo Switch"))
-            }
-
-            if (it.name == "Laptops") {
-                productsNames.addAll(listOf("Macbook", "HP", "Lenovo", "Acer"))
-            }
-
-            productsNames.forEach {
-                name -> products.add(Product(name = name, category = it, price = (100..500).random()))
-            }
-        } 
+        }
     }
 }

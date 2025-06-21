@@ -9,16 +9,21 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.app.models.Cart
 import com.example.app.models.Product
-import com.example.app.models.cartItems
-import com.example.app.models.products
+import com.example.app.providers.RealmProvider
+import io.realm.kotlin.ext.query
+import kotlinx.coroutines.flow.map
 
 @Composable
 fun ProductsScreen() {
+    val realm = RealmProvider.realm
+    val products = realm.query<Product>().find()
+
     productList(products)
 }
 
@@ -40,7 +45,11 @@ fun productRow(product: Product) {
     ) {
         Column(modifier = Modifier.padding(8.dp), verticalArrangement = Arrangement.Center) {
             Text(product.name)
-            Text(product.category.name)
+
+            product.category?.let {
+                Text("Category: " + it.name)
+            }
+
             Text("$" + product.price.toString())
 
             AddToCartButton(product)
@@ -50,28 +59,47 @@ fun productRow(product: Product) {
 
 @Composable
 fun AddToCartButton(product: Product) {
-    val existItem = cartItems.find { it.productID == product.id }
+    val realm = RealmProvider.realm
 
-    if (existItem != null) {
-        Text("In cart: " + existItem.amount.value)
+    val cartItemState = realm.query<Cart>("product._id = $0", product._id)
+            .first()
+            .asFlow()
+            .map { it?.obj }
+            .collectAsState(initial = null)
+
+    val cartItem = cartItemState.value
+
+    if (cartItem != null) {
+        Text("In cart: " + cartItem.amount)
     }
 
     Button(
         onClick = {
-            if (existItem != null) {
-                existItem.amount.value++
-            } else {
-                cartItems.add(Cart(product.id))
+            realm.writeBlocking {
+                if (cartItem != null) {
+                    findLatest(cartItem)?.let { it.amount++ }
+                } else {
+                    copyToRealm(Cart().apply {
+                        this.product = findLatest(product)
+                        amount = 1
+                    })
+                }
             }
         }) { Text("Add to cart") }
 
-    if (existItem != null) {
+    if (cartItem != null) {
         Button(
             onClick = {
-                if (existItem.amount.value <= 1) {
-                    cartItems.remove(existItem)
-                } else {
-                    existItem.amount.value--
+                realm.writeBlocking {
+                    val latestCartItem = findLatest(cartItem)
+
+                    if (latestCartItem != null) {
+                        if (latestCartItem.amount <= 1) {
+                            delete(latestCartItem)
+                        } else {
+                            latestCartItem.amount--
+                        }
+                    }
                 }
             }) { Text("Remove from cart") }
     }
