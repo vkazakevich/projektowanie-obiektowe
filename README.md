@@ -126,7 +126,7 @@ Link: [Link](https://po-swift-824cc8171273.herokuapp.com/)
 
 Kod: [Tests](<./Tests>)
 
-**Zadanie 9** Android (Kotlin) **[WIP]**
+**Zadanie 9** Android (Kotlin)
 
 :white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/vkazakevich/projektowanie-obiektowe/commit/f8e2ce9090cfad8ba5873fc526cf03a536c78d69)
 
