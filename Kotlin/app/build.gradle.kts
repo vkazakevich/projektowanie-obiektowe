@@ -59,4 +59,9 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.realm.kotlin.base)
     implementation(libs.kotlinx.coroutines.core)
+
+    implementation("com.stripe:stripe-android:21.18.0")
+    implementation("com.stripe:financial-connections:21.18.0")
+    implementation("com.github.kittinunf.fuel:fuel:2.3.1")
+    implementation("com.github.kittinunf.fuel:fuel-json:2.3.1")
 }
