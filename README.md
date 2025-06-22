@@ -133,3 +133,5 @@ Kod: [Tests](<./Tests>)
 :white_check_mark: 3.5 wymaganie 2 [Link do commita 2](https://github.com/vkazakevich/projektowanie-obiektowe/commit/98515205d2f4bf757c5d1dc7cd463eddb9da236b)
 
 :white_check_mark: 4.0 wymaganie 3 [Link do commita 3](https://github.com/vkazakevich/projektowanie-obiektowe/commit/4fc95a0f84f65d9428ae9905ce1b1f7f962e2a6d)
+
+:white_check_mark: 4.5 wymaganie 4 [Link do commita 4](https://github.com/vkazakevich/projektowanie-obiektowe/commit/238593826dc25d7930ead4094c3b83129e816bba)
